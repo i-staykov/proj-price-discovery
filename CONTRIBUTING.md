@@ -12,6 +12,11 @@ clean, not to add ceremony.
 4. Open a pull request whose body contains `Closes #12`. CI must be green.
 5. The other brother reviews. Review enforces the writing standard below as much as the code.
 
+`main` is protected: one approval, CI green, conversations resolved, no force pushes, no deletion.
+Pull requests are squashed, so `main` carries one commit per merged pull request. Administrator
+bypass is deliberately left open, because with two people an unavailable reviewer would otherwise
+block everything. Using it is a decision to explain in the commit message, not a shortcut.
+
 Every commit on `main` references an issue. If you find yourself writing code with no ticket, stop
 and open the ticket first; it usually turns out the scope was unclear.
 
