@@ -7,7 +7,7 @@ dependencies = []
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.6"]
-notebook = ["pandas>=2", "requests>=2.32", "jupyter>=1", "ipykernel>=6"]
+notebook = ["pandas>=2", "matplotlib>=3.9", "requests>=2.32", "jupyter>=1", "ipykernel>=6"]
 
 [build-system]
 requires = ["hatchling"]
