@@ -28,6 +28,14 @@ merged. If asked for estimation code before then, say so instead of writing it.
 - No adjective without a measurement behind it. State uncertainty as an interval.
 - Axes get labels and units.
 
+## Length
+
+Assume the reader stops after fifteen lines, because they do. An issue is at most fifteen lines; a
+pull request body at most ten. Say a thing once: an introduction and a summary that both state it
+mean the reader skims both. Given two drafts with the same content, the shorter is correct.
+
+Derivations are exempt. Length is a fault only when it is padding.
+
 ## Commits
 
 Every commit references an issue number. Every pull request body contains `Closes #N`.
