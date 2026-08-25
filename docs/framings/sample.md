@@ -27,7 +27,16 @@ Price coverage is complete at one row per second from 2017-09-01 onward; 2017-08
 day, has 71,972 of 86,400 seconds. Binance emits no kline for a second without a trade, so row count
 is a liquidity floor rather than a file-integrity check.
 
-At $E \approx 107$ per release type the population spread $\sigma$ in `fraction-of-move.md` is
-identified but not precisely: the year and release-type contrasts are the constrained comparisons,
-not the pooled half-life. Dropping events after inspecting them is excluded; exclusion rules are
-fixed in `PREREGISTRATION.md`.
+## Primary sample
+
+CPI and the Employment Situation, 214 events. Both release at 08:30 ET with no second scheduled
+release inside the one-hour window.
+
+FOMC is excluded from the primary sample and retained as a robustness check: the chair's press
+conference at 14:30 ET falls inside the window, so $R_e(H)$ would measure the statement and the
+press conference jointly. ADR 0002 carries the argument.
+
+At $E = 214$ the population spread $\sigma$ in `fraction-of-move.md` is identified but not
+precisely: the year and release-type contrasts are the constrained comparisons, not the pooled
+half-life. Dropping events after inspecting them is excluded; exclusion rules are fixed in
+`PREREGISTRATION.md`.

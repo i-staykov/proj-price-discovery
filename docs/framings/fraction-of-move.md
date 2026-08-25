@@ -10,6 +10,12 @@ reported at the horizons in $\mathcal{T}$ with credible intervals, and summarise
 half-life. $\phi_e(H) = 1$ by construction: the framing measures the speed of convergence to a
 destination it defines, and makes no claim that the destination is the efficient price.
 
+The estimand requires that no second scheduled information event falls inside $(0, H]$. FOMC
+statements fail this: the chair's press conference begins at 14:30 ET, 30 minutes into a one-hour
+window, and has followed every meeting since 2019. The primary sample is therefore CPI and the
+Employment Situation, both at 08:30 ET with nothing scheduled behind them. ADR 0002 records the
+decision and the rejected alternatives.
+
 ## Model
 
 The ratio is never formed. $R_e(H)$ is small for uninformative releases, so a per-event ratio is
@@ -36,10 +42,10 @@ $$\log \lambda_e \sim \mathcal{N}(\mu, \sigma^2), \qquad
 
 Logarithms because both quantities are positive and plausibly span orders of magnitude.
 
-Partial pooling is required by the sample: at $E \approx 107$ per release type (`sample.md`), no
-pooling gives per-event posteriors too diffuse to report, and complete pooling forecloses the
-release-type and year-over-year contrasts. Shrinkage is governed by $\sigma$, which is estimated
-rather than fixed.
+Partial pooling is required by the sample: at $E \approx 214$ across the two primary release types
+(`sample.md`), no pooling gives per-event posteriors too diffuse to report, and complete pooling
+forecloses the release-type and year-over-year contrasts. Shrinkage is governed by $\sigma$, which
+is estimated rather than fixed.
 
 ## Priors
 
@@ -63,6 +69,9 @@ would manufacture heterogeneity. Prior predictive checks precede any fit.
 
 **$H$ is a choice.** If $\phi(\tau)$ at fixed $\tau$ moves materially under $H \in \{30\,\mathrm{min},
 4\,\mathrm{h}\}$, the result is a function of an arbitrary constant and the sensitivity is reported.
+
+**Contamination inside the window.** $H$ must contain no second scheduled release. This is why FOMC
+is excluded from the primary sample; the same test applies to any release type added later.
 
 **Exponential form.** Overshoot and reversion, or two-stage incorporation, are not representable by
 a single rate. Diagnosed from residual structure across $\tau$; a systematic pattern is a finding,
