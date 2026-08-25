@@ -1,19 +1,33 @@
 # Sample
 
-Placeholder. The counts land here from #7 before #12 merges.
+Counts from #7, measured against the `BTCUSDT` spot archive on `data.binance.vision`. Coverage runs
+2017-08-17 to 2026-07-31, 108 months, identical across klines, aggTrades and trades.
 
-The model in `fraction-of-move.md` needs the number of usable events, because the population spread
-$\sigma$ is estimated from across-event variation and there is no substitute for having events. The
-working assumption is roughly 32 a year, monthly CPI and Employment Situation plus eight FOMC
-meetings, against Binance history from around 2017, giving order 200. **Nothing in this directory
-should be trusted until that number is measured rather than assumed.**
+| Year | CPI | Employment Situation | FOMC confirmed | FOMC estimated |
+| :-- | --: | --: | --: | --: |
+| 2017 | 4 | 4 | 0 | 3 |
+| 2018 | 12 | 12 | 0 | 8 |
+| 2019 | 12 | 12 | 0 | 8 |
+| 2020 | 12 | 12 | 0 | 10 |
+| 2021 | 12 | 12 | 8 | 0 |
+| 2022 | 12 | 12 | 8 | 0 |
+| 2023 | 12 | 12 | 8 | 0 |
+| 2024 | 12 | 12 | 8 | 0 |
+| 2025 | 12 | 12 | 8 | 0 |
+| 2026 | 7 | 7 | 5 | 0 |
+| **Total** | **107** | **107** | **45** | **29** |
 
-To record here, per release type and per year:
+CPI and Employment Situation counts are ceilings from publication cadence, one per covered month;
+the July 2017 releases (2017-08-11 and 2017-08-04) precede coverage. FOMC dates for 2021 onward are
+from the Federal Reserve calendar; 2017 to 2020 is a cadence estimate including two unscheduled
+March 2020 statements, and is unverified. Verified dates are #8's output, and the numbers here are
+revised when that lands.
 
-- Events with usable price data on both sides of the release instant.
-- Events dropped, and the reason, decided before looking at which are inconvenient.
-- The resulting total.
+Price coverage is complete at one row per second from 2017-09-01 onward; 2017-08-17, the listing
+day, has 71,972 of 86,400 seconds. Binance emits no kline for a second without a trade, so row count
+is a liquidity floor rather than a file-integrity check.
 
-If the count comes in near 60 rather than 200, $\sigma$ is weakly identified and the hierarchical
-model needs either a tighter prior or a reduced ambition. Say which, here, rather than discovering
-it during estimation.
+At $E \approx 107$ per release type the population spread $\sigma$ in `fraction-of-move.md` is
+identified but not precisely: the year and release-type contrasts are the constrained comparisons,
+not the pooled half-life. Dropping events after inspecting them is excluded; exclusion rules are
+fixed in `PREREGISTRATION.md`.

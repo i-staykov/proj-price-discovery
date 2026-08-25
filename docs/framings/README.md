@@ -1,53 +1,39 @@
 # Framings
 
-What we chose to measure, and what we did not.
+**Chosen: fraction of the eventual move**, estimated with a Bayesian hierarchical model.
+`fraction-of-move.md` states it, `notation.md` fixes the symbols, `sample.md` gives the event
+counts.
 
-**Chosen: fraction of the eventual move**, estimated with a Bayesian hierarchical model. Full
-statement in `fraction-of-move.md`, symbols in `notation.md`, event counts in `sample.md`.
+It measures speed, not completeness, and requires only prices and timestamps. The alternatives below
+each require something unavailable.
 
-It measures speed, not completeness. It needs only prices and timestamps, which is the whole reason
-it is viable: the alternatives below each need something we cannot get for free.
+## Rejected: Bayesian belief updating
 
-## Rejected for now: Bayesian belief updating
+Treat the price as the market's posterior mean over a latent value, $P_t = \mathbb{E}[V \mid
+\mathcal{F}_t]$, and measure incorporation as the decay of $\mathrm{Var}(V \mid \mathcal{F}_t)$.
+This is the framing that answers how much is ever incorporated, since the variance may plateau above
+zero. The estimand chosen here concerns speed, so the additional structure buys nothing, and it
+costs an assumption about market behaviour that would have to be defended rather than stated.
 
-Posit a latent value $V$ that the release is informative about, and treat the price as the market's
-posterior mean, $P_t = \mathbb{E}[V \mid \mathcal{F}_t]$. Incorporation is then the decay of
-$\mathrm{Var}(V \mid \mathcal{F}_t)$, and "priced in" acquires a meaning the chosen framing cannot
-express: residual uncertainty about the true value.
+## Rejected: mutual information
 
-This is the framing that answers *how much is ever incorporated*, since the variance can plateau
-above zero. We are asking how fast, so we do not need it.
+$I(R(\tau); R(H))$ normalised by $H(R(H))$ gives a curve on $[0,1]$ with an entropy interpretation
+and no dependence on consensus data.
 
-It costs an assumption that the price is a conditional expectation of a well-defined latent value.
-That is a real commitment about market behaviour, and defending it is a paper of its own.
-
-## Rejected for now: mutual information
-
-Measure the bits about the eventual move revealed by time $\tau$:
-
-$$I\!\left(R(\tau); R(H)\right) \quad \text{normalised by } H(R(H))$$
-
-Appealing, because it needs no consensus data and yields a curve from 0 to 1 with a genuine units
-interpretation: the fraction of the eventual move's entropy resolved by $\tau$.
-
-**It collapses.** If $(R(\tau), R(H))$ are jointly Gaussian with correlation $\rho$, then
+Under joint Gaussianity with correlation $\rho$,
 
 $$I = -\tfrac{1}{2}\log\left(1 - \rho^2\right)$$
 
-Mutual information is then a monotone function of the correlation and contains nothing that $\rho$
-did not. Estimating it would be an expensive route to $R^2$.
-
-It earns its place only if the dependence is materially non-Gaussian: tail dependence, or the early
-move predicting the magnitude of the eventual move without predicting its sign. That is plausible
-here and would be a genuine finding. It is also a separate study, and it needs far more events than
-a curve fit does, because estimating mutual information from samples is hard.
-
-If we return to this, the honest version reports the Gaussian reduction first and then the measured
-excess over it. A reviewer who finds the collapse unmentioned discounts everything else.
+so the estimand is a monotone transform of the correlation and the exercise reduces to $R^2$. It
+earns its place only under material non-Gaussian dependence, such as tail dependence or the early
+move informing the magnitude but not the sign of the eventual move. Testing that is a separate study
+and needs more events than a curve fit does, since sample estimators of mutual information converge
+slowly. If it is revisited, the Gaussian reduction is reported first and the measured excess over it
+second.
 
 ## Rejected: anything requiring consensus forecasts
 
-The surprise, the gap between the released number and what was expected, is the natural measure of
-an event's information content. Consensus forecast data is not free, so the surprise is unobserved
-and the eventual move stands in for it. This is a real limitation and belongs in
-`docs/limitations.md`, not a footnote here.
+The surprise is the natural measure of an event's information content and is not available free. The
+eventual move substitutes for it, which is a limitation of the study rather than a footnote here;
+`docs/limitations.md` (#11) carries it.
+

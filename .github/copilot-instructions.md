@@ -36,6 +36,12 @@ mean the reader skims both. Given two drafts with the same content, the shorter 
 
 Derivations are exempt. Length is a fault only when it is padding.
 
+## Register
+
+Everything committed is production. No teaching, no toy examples, no analogies, no "recall that".
+Justify a choice; do not explain the concept behind it. Learning material lives outside the
+repository.
+
 ## Commits
 
 Every commit references an issue number. Every pull request body contains `Closes #N`.

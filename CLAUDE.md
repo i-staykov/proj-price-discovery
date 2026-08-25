@@ -82,6 +82,23 @@ at length is weaker than the same rule stated in a line.
 The exception is derivation. A modelling argument may run long, because each line does work. Length
 is a fault only when it is padding.
 
+### Register
+
+**Everything committed here is production.** It is written for a competent reader who does not need
+the underlying concepts taught to them, and it is the version an employer or a reviewer will read.
+
+No teaching in the repository. No toy example carried through to show how a formula behaves, no
+"recall that", no motivating analogy, no paragraph explaining why the obvious estimator is biased
+when naming the bias is enough. State the model, state the assumption, state what breaks it.
+
+The distinction is between justifying a choice and explaining it. Justification stays: a reviewer
+must see why partial pooling rather than none, and the answer is one sentence about the event count.
+Explaining what partial pooling is belongs elsewhere.
+
+Learning material, walkthroughs and presentations live outside the repository. They are useful and
+they are not this artifact.
+
+
 ### In research writing
 
 - **No adjective without a measurement behind it.** "Significantly faster" is rejected; "0.6 s
