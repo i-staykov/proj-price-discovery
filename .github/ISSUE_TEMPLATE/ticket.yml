@@ -1,0 +1,34 @@
+name: Ticket
+description: A unit of work no larger than one evening.
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: The question this answers
+      description: One sentence, phrased as a question. If it will not phrase, the ticket is not ready.
+    validations:
+      required: true
+
+  - type: textarea
+    id: dod
+    attributes:
+      label: Definition of Done
+      description: >
+        An observable artifact: a file at a stated path, a figure, a passing test. Not
+        "investigate X".
+      placeholder: |
+        - data/calendar.csv exists, one row per release, columns: release, timestamp_utc, source_url
+        - tests/test_calendar.py asserts every timestamp is timezone-aware UTC
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: What is already known
+      description: Prior findings, links, the ticket this is blocked on. Leave empty if nothing.
+
+  - type: markdown
+    attributes:
+      value: >
+        Set the milestone, an `area:` label, and a `type:` label if one applies, before you start.
