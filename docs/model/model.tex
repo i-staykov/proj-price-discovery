@@ -42,8 +42,8 @@
 % A key-number callout: big figure, small caption underneath.
 \newcommand{\stat}[3]{%
   \begin{minipage}[t]{#1}\centering
-  {\fontsize{26}{28}\selectfont\bfseries\color{accent}#2}\\[0.3em]
-  {\small\color{muted}#3}
+  {\fontsize{20}{22}\selectfont\bfseries\color{accent}#2}\\[0.25em]
+  {\scriptsize\color{muted}#3}
   \end{minipage}}
 
 \title{How fast does the market\\price in the news?}
@@ -97,15 +97,15 @@
 
 % ---------------------------------------------------------------- 2
 \begin{frame}{Does it even react? We checked first.}
-\vspace{-0.2em}
+\vspace{-0.8em}
 \begin{center}
-\includegraphics[width=0.86\textwidth,trim=0 0 0 0,clip]{../../figures/spikeGrid.png}
+\includegraphics[height=0.58\textheight]{../../figures/spikeGrid.png}
 \end{center}
-\vspace{-0.4em}
+\vspace{0.2em}
 \begin{center}
-\stat{0.26\textwidth}{9 / 9}{release dates show a jump}\hfill
-\stat{0.26\textwidth}{5.6$\times$}{median vs.\ a normal day}\hfill
-\stat{0.26\textwidth}{both ways}{sign follows the surprise}
+\stat{0.28\textwidth}{9 / 9}{dates show a jump}\hfill
+\stat{0.28\textwidth}{5.6$\times$}{median vs.\ a normal day}\hfill
+\stat{0.28\textwidth}{$\pm$}{sign follows the surprise}
 \end{center}
 \end{frame}
 
@@ -177,12 +177,12 @@ $$\tau_{1/2}=\frac{\ln 2}{\lambda}$$
 \end{center}
 \vspace{1.2em}
 \begin{center}
-\begin{tikzpicture}[font=\small,node distance=0.6cm]
-\node[draw,rounded corners,fill=wash,inner sep=9pt,text width=3.4cm,align=center] (a)
+\begin{tikzpicture}[font=\small,node distance=0.9cm]
+\node[draw,rounded corners,fill=wash,inner sep=8pt,text width=2.9cm,align=center] (a)
   {big surprise\\[0.2em]\lead{+40 bp}};
-\node[draw,rounded corners,fill=wash,inner sep=9pt,text width=3.4cm,align=center,right=1.6cm of a] (b)
+\node[draw,rounded corners,fill=wash,inner sep=8pt,text width=2.9cm,align=center,right=of a] (b)
   {dull release\\[0.2em]\lead{+2 bp}};
-\node[draw=warn,line width=1.2pt,rounded corners,fill=warn!8,inner sep=9pt,text width=4.0cm,align=center,right=1.6cm of b] (c)
+\node[draw=warn,line width=1.2pt,rounded corners,fill=warn!8,inner sep=8pt,text width=3.3cm,align=center,right=of b] (c)
   {noise is $\pm$3 bp\\[0.2em]\bad{denominator $\to$ 0}};
 \draw[-{Latex[length=2mm]},muted] (a)--(b);
 \draw[-{Latex[length=2mm]},warn] (b)--(c);
@@ -369,37 +369,6 @@ The link through $\mu,\sigma$ is how one event's data informs another's estimate
    Hamiltonian Monte Carlo draws from the posterior without ever writing it down.\\[0.6em]
    {\color{muted}A 95\% interval is literally the 2.5th and 97.5th percentile of the draws.}};
 \end{tikzpicture}
-\end{center}
-\end{frame}
-
-% ---------------------------------------------------------------- 12
-\begin{frame}{Yes, it rhymes with TrueSkill. Up to a point.}
-\vspace{0.7em}
-\begin{columns}[T,onlytextwidth]
-\begin{column}{0.47\textwidth}
-{\color{good}\bfseries Same shape}
-\vspace{0.5em}
-\begin{itemize}\setlength\itemsep{0.45em}\small
-\item latent quantity per entity
-\item population prior over it
-\item evidence updates it
-\item shrinkage carries the thin cases
-\end{itemize}
-\end{column}
-\begin{column}{0.47\textwidth}
-{\color{warn}\bfseries Different engine}
-\vspace{0.5em}
-\begin{itemize}\setlength\itemsep{0.45em}\small
-\item TrueSkill: every message stays Gaussian, so \lead{EP works}
-\item ours: the likelihood is nonlinear in $\lambda$
-\item the messages have no closed form
-\item \lead{so: sampling, not message passing}
-\end{itemize}
-\end{column}
-\end{columns}
-\vspace{1.2em}
-\begin{center}
-{\color{muted}It is a factor graph. It is just not fitted by passing messages around it.}
 \end{center}
 \end{frame}
 

@@ -23,9 +23,24 @@ provably predates the results.
 
 ## Running it
 
+Requires [uv](https://docs.astral.sh/uv/) and [just](https://github.com/casey/just); on macOS,
+`brew install uv just`. Python is pinned to 3.12 or newer by `pyproject.toml` and installed by uv.
+
 ```sh
-just setup   # uv sync, creates .venv
+just setup   # uv sync, creates .venv from pyproject.toml and uv.lock
 just check   # ruff and pytest
+```
+
+Dependencies live in `pyproject.toml` and are pinned in `uv.lock`. There is no `requirements.txt`
+on purpose: one manifest, one lockfile, no third place to drift. `just setup` installs the `dev`
+extra; the `notebook` extra adds pandas, matplotlib, requests and a kernel for `notebooks/`, via
+`uv sync --extra notebook`.
+
+`model.pdf` needs a LaTeX distribution with beamer, TikZ and pgfplots, which TeX Live and MacTeX
+both provide. It is committed, so this is only needed to change it:
+
+```sh
+cd docs/model && pdflatex model.tex && cp model.pdf ../../model.pdf
 ```
 
 `just results` will regenerate every figure and every number quoted in this README from raw data. It
@@ -36,7 +51,11 @@ currently exits non-zero, because there are no results to regenerate.
 - `CLAUDE.md` — the standing rules: what the project is, what may not be done, and the writing
   standard reviews enforce.
 - `CONTRIBUTING.md` — the ticket-to-merge workflow.
-- `docs/adr/` — one short record per decision that is expensive to reverse.
+- `model.pdf` — the model in fifteen slides, for a reader meeting it for the first time. Source in
+  `docs/model/`.
+- `docs/framings/` — the estimand and the model, stated rather than explained. `docs/adr/` — one
+  short record per decision that is expensive to reverse. `docs/limitations.md` — the objections,
+  including those with no answer.
 - `src/pricediscovery/` — library code. `tests/` — tests, in particular for event-time alignment.
 
 ## Licence
