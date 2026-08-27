@@ -7,11 +7,11 @@
 | $\tau = t - t_e$ | event time, seconds since release |
 | $P_e(\tau)$ | price on event $e$'s day at event time $\tau$ |
 | $R_e(\tau) = \log P_e(\tau) - \log P_e(0^-)$ | cumulative log return from the last price before release |
+| $m_e(\tau) = \mathbb{E}[R_e(\tau)]$ | systematic component: the part attributable to the release |
 | $H$ | terminal horizon; working value 1 hour |
-| $R_e(H)$ | eventual move |
+| $M_e = m_e(H)$ | expected move at the terminal horizon, basis points |
 | $\mathcal{T}$ | horizon grid $\{1\,\mathrm{s}, 10\,\mathrm{s}, 1\,\mathrm{min}, 10\,\mathrm{min}, 1\,\mathrm{h}\}$ |
-| $\phi_e(\tau)$ | fraction of the eventual move realised by $\tau$ |
-| $A_e$ | amplitude, basis points |
+| $\phi_e(\tau) = m_e(\tau)/m_e(H)$ | fraction of the eventual move realised by $\tau$ |
 | $\lambda_e$ | incorporation rate, $\mathrm{s}^{-1}$ |
 | $\tau^{1/2}_e = \ln 2 / \lambda_e$ | half-life, seconds |
 | $\mu, \sigma$ | population mean and standard deviation of $\log \lambda_e$ |

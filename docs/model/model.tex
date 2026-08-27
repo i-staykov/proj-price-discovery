@@ -154,15 +154,17 @@ Of the move the release eventually causes,\\[0.5em]
 \end{column}
 \begin{column}{0.38\textwidth}
 \vspace{1.2em}
-$$\phi(\tau)=1-e^{-\lambda\tau}$$
-\vspace{0.4em}
+$$\phi(\tau)=\frac{1-e^{-\lambda\tau}}{1-e^{-\lambda H}}$$
+\vspace{0.2em}
 
-One number per event: \lead{$\lambda$}.
-\vspace{1.0em}
+One number per event: \lead{$\lambda$}.\\
+{\scriptsize\color{muted}The denominator makes $\phi(H)$ exactly 1. For fast rates it is 1 to
+machine precision.}
+\vspace{0.7em}
 
 We report its half-life
 $$\tau_{1/2}=\frac{\ln 2}{\lambda}$$
-\vspace{0.2em}
+\vspace{0.1em}
 
 {\color{muted}\small ``half the move happened in 6.9 seconds'' --- a sentence you can argue with.}
 \end{column}
@@ -226,18 +228,18 @@ and the first thing a reviewer will look for.}
 \begin{center}
 \begin{tikzpicture}[font=\small]
 \node[draw,rounded corners,fill=wash,inner sep=11pt,text width=4.6cm,align=center] (A)
-  {\lead{$A_e$}\ \ amplitude\\[0.3em]{\color{muted}how big was the news}\\[0.2em]{\color{muted}\itshape don't care}};
+  {\lead{$M_e$}\ \ size of the move\\[0.3em]{\color{muted}how big was the news}\\[0.2em]{\color{muted}\itshape don't care}};
 \node[draw=accent,line width=1.2pt,rounded corners,fill=accent!8,inner sep=11pt,text width=4.6cm,align=center,right=1.4cm of A] (L)
   {\lead{$\lambda_e$}\ \ rate\\[0.3em]{\color{muted}how fast it was absorbed}\\[0.2em]{\color{accent}\itshape the answer}};
 \end{tikzpicture}
 \end{center}
-\vspace{1.0em}
-$$\mathbb{E}\big[R_e(\tau)\big]=A_e\big(1-e^{-\lambda_e\tau}\big)
+\vspace{0.9em}
+$$m_e(\tau)=M_e\,\frac{1-e^{-\lambda_e\tau}}{1-e^{-\lambda_e H}}
 \qquad\Longrightarrow\qquad
-\phi_e(\tau)=\frac{\ \sout{A_e}\,\big(1-e^{-\lambda_e\tau}\big)}{\sout{A_e}}$$
-\vspace{0.4em}
+\phi_e(\tau)=\frac{\ \sout{M_e}\,\dfrac{1-e^{-\lambda_e\tau}}{1-e^{-\lambda_e H}}}{\sout{M_e}}$$
+\vspace{0.3em}
 \begin{center}
-\ok{The amplitude cancels on paper.} A dull event now gives a \emph{wide} answer,\\
+\ok{The size cancels on paper.} A dull event now gives a \emph{wide} answer,\\
 {\color{muted}which is the honest response to weak evidence. Nothing is dropped.}
 \end{center}
 \end{frame}
@@ -327,7 +329,7 @@ $$\log\lambda_e\ \sim\ \mathcal{N}(\mu,\ \sigma^2)$$
 
 \node[pri] (pa)  at (1.4,0.4) {prior};
 \node[fac] (fa)  at (3.0,0.4) {};
-\node[var] (amp) at (4.4,0.4) {$A_e$};
+\node[var] (amp) at (4.4,0.4) {$M_e$};
 
 \node[fac] (fl)  at (6.3,1.35) {};
 \node[obs] (R)   at (7.8,1.35) {$R_{ek}$};
@@ -359,9 +361,9 @@ The link through $\mu,\sigma$ is how one event's data informs another's estimate
 \begin{center}
 \begin{tikzpicture}[font=\small]
 \node[draw,rounded corners,fill=wash,inner sep=9pt,text width=4.7cm,align=left] (a)
-  {$A_e$ given $\lambda_e$\hfill\ok{closed form}\\[0.2em]{\color{muted}\scriptsize plain linear regression}};
+  {$M_e$ given $\lambda_e$\hfill\ok{closed form}\\[0.2em]{\color{muted}\scriptsize plain linear regression}};
 \node[draw=warn,line width=1.1pt,rounded corners,fill=warn!8,inner sep=9pt,text width=4.7cm,align=left,below=0.35cm of a] (b)
-  {$\lambda_e$ given $A_e$\hfill\bad{none}\\[0.2em]{\color{muted}\scriptsize $\lambda$ sits inside $e^{-\lambda\tau}$}};
+  {$\lambda_e$ given $M_e$\hfill\bad{none}\\[0.2em]{\color{muted}\scriptsize $\lambda$ sits inside $e^{-\lambda\tau}$}};
 \node[draw=warn,line width=1.1pt,rounded corners,fill=warn!8,inner sep=9pt,text width=4.7cm,align=left,below=0.35cm of b] (c)
   {the joint posterior\hfill\bad{none}\\[0.2em]{\color{muted}\scriptsize 400+ parameters, no name}};
 \node[right=1.0cm of b,text width=5.0cm,align=left] (x)

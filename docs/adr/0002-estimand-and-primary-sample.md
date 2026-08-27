@@ -15,12 +15,17 @@ belief-updating framing requires treating the price as a conditional expectation
 
 ## Decision
 
-The estimand is the incorporation curve $\phi(\tau) = R(\tau)/R(H)$, the fraction of the eventual
-move realised by event time $\tau$, reported at 1 s, 10 s, 1 min, 10 min and 1 h with 95% credible
-intervals, and summarised by the population half-life in seconds.
+The estimand is the incorporation curve $\phi(\tau) = m(\tau)/m(H)$, where $m(\tau)$ is the expected
+return at event time $\tau$: the fraction of the eventual move realised by $\tau$, reported at 1 s,
+10 s, 1 min, 10 min and 1 h with 95% credible intervals, and summarised by the population half-life
+in seconds.
+
+It is a ratio of expectations rather than of realised returns, so that no division by a noisy
+observation occurs anywhere.
 
 It is estimated by the hierarchical model in `docs/framings/fraction-of-move.md`, which separates
-amplitude from rate so the ratio is never formed and small-move events are not excluded.
+the magnitude of the response from its speed so the ratio is never formed and small-move events are
+not excluded.
 
 $H = 1$ hour. The primary sample is CPI and the Employment Situation: 214 events, 2017-09 to 2026-07.
 
@@ -35,6 +40,12 @@ is speed, so the extra assumption buys nothing.
 
 **Conditioning on a large eventual move.** The obvious repair for an unstable ratio, and it selects
 on the outcome. Avoided structurally by not forming the ratio.
+
+**Normalising by the asymptote rather than by $m(H)$.** Writing the curve as $A(1 - e^{-\lambda\tau})$
+makes $\phi$ the fraction of the $\tau \to \infty$ limit, which equals 1 only in that limit and not
+at $H$. The two agree to machine precision when the half-life is seconds, and differ by a factor of
+1.33 at a 30-minute half-life and 2 at an hour. Since the study cannot assume its own answer, the
+denominator is $1 - e^{-\lambda H}$ and $\phi(H) = 1$ holds exactly.
 
 **FOMC in the primary sample.** The statement is released at 14:00 ET and the chair's press
 conference begins at 14:30, inside the one-hour window, at every meeting since 2019. $R_e(H)$ would

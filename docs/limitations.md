@@ -30,9 +30,9 @@ everything else that happened. On a quiet morning it is mostly the release; on a
 denominator is noise, and you have no way to tell the two apart.*
 
 Correct, and it is the price of having no consensus forecast to measure the surprise against. The
-model mitigates rather than solves: amplitude is a per-event parameter, so an event whose window was
-dominated by unrelated news produces a diffuse posterior on its rate rather than a confident wrong
-answer.
+model mitigates rather than solves: the size of the move is a per-event parameter, so an event whose
+window was dominated by unrelated news produces a diffuse posterior on its rate rather than a
+confident wrong answer.
 
 What we cannot do is decompose $R_e(H)$ into release and non-release components. Nothing in the free
 data supports it.
@@ -45,9 +45,10 @@ data supports it.
 choosing events using information from after the release, and your curve is a curve of the events
 that happened to move.*
 
-This is the objection the model was built around. The ratio $R(\tau)/R(H)$ is never formed; the
-model fits amplitude and rate jointly, so a release that moved nothing contributes weak evidence
-about its rate rather than a divergent ratio, and no event is dropped for being uninformative.
+This is the objection the model was built around. The estimand is a ratio of expectations, not of
+realised returns, so $R(\tau)/R(H)$ is never formed; the model fits size and rate jointly, so a
+release that moved nothing contributes weak evidence about its rate rather than a divergent ratio,
+and no event is dropped for being uninformative.
 
 Exclusion rules are fixed in `PREREGISTRATION.md` before any fit and concern data integrity only.
 
