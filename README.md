@@ -8,17 +8,11 @@ instrument for measuring the speed of price discovery rather than its direction.
 `data.binance.vision`, which is free and requires no API key, and crypto trades continuously, so a
 release lands in an open market with no session boundary to model.
 
-This is a measurement study, not a trading strategy. There is no backtest here and there will not be
-one.
+This is a measurement study, not a trading strategy.
 
 ## Status
 
-🚧 **Scoping.** We are verifying the premise and have not chosen an estimand. Nothing in this
-repository is a result yet.
-
-The first question is whether crypto prices visibly react to US macro releases at all. If they do
-not, the premise is wrong and the project changes or stops; that answer will be recorded here either
-way. No estimation code will be written before `PREREGISTRATION.md` is merged, so that the plan
+🚧 **Scoping.** No estimation code will be written before `PREREGISTRATION.md` is merged, so that the plan
 provably predates the results.
 
 ## Running it
@@ -31,8 +25,7 @@ just setup   # uv sync, creates .venv from pyproject.toml and uv.lock
 just check   # ruff and pytest
 ```
 
-Dependencies live in `pyproject.toml` and are pinned in `uv.lock`. There is no `requirements.txt`
-on purpose: one manifest, one lockfile, no third place to drift. `just setup` installs the `dev`
+Dependencies live in `pyproject.toml` and are pinned in `uv.lock`. `just setup` installs the `dev`
 extra; the `notebook` extra adds pandas, matplotlib, requests and a kernel for `notebooks/`, via
 `uv sync --extra notebook`.
 
@@ -53,11 +46,7 @@ currently exits non-zero, because there are no results to regenerate.
 - `CONTRIBUTING.md` — the ticket-to-merge workflow.
 - `model.pdf` — the model in fifteen slides, for a reader meeting it for the first time. Source in
   `docs/model/`.
-- `docs/framings/` — the estimand and the model, stated rather than explained. `docs/adr/` — one
-  short record per decision that is expensive to reverse. `docs/limitations.md` — the objections,
-  including those with no answer.
+- `docs/framings/` — the estimand and the model.
+- `docs/adr/` — one short record per decision that is expensive to reverse.
+- `docs/limitations.md` — the objections.
 - `src/pricediscovery/` — library code. `tests/` — tests, in particular for event-time alignment.
-
-## Licence
-
-MIT, see `LICENSE`.
