@@ -84,17 +84,8 @@ the joint posterior is sampled. Reported intervals are quantiles of the draws.
 
 ## Priors
 
-Fixed in `PREREGISTRATION.md`, not revised afterwards.
-
-The prior on $\mu$ is centred on a 10 s half-life ($\log\lambda = -2.7$) with scale 1.5, spanning
-roughly 0.5 s to 200 s at two standard deviations. Using #6 to set it is a soft use of nine events
-to bound a belief over 214; it is disclosed in `PREREGISTRATION.md`, and at this sample size the
-posterior on $\mu$ is data-dominated.
-
-The prior on $\sigma$ is half-normal, admitting $\sigma \to 0$. A prior excluding small $\sigma$
-would manufacture heterogeneity.
-
-Prior predictive checks precede any fit.
+In `PREREGISTRATION.md`, with the argument for each. They are fixed before any fit and not revised
+afterwards, which is why they live there rather than here.
 
 ## Reported quantities
 
@@ -104,32 +95,10 @@ Prior predictive checks precede any fit.
 - $\sigma$. A large $\sigma$ is a result: incorporation speed is a distribution, not a constant.
 - Release-type and year contrasts on $\mu$, as group effects in the same model.
 
-## Failure modes
-
-**$H$ is a choice.** It enters the estimand through the denominator, so sensitivity to
-$H \in \{30\,\mathrm{min}, 4\,\mathrm{h}\}$ is material whenever the half-life is an appreciable
-fraction of $H$, not a formality. Reported either way.
-
-**Exponential form.** $\phi_e$ is monotone in $\tau$ by construction, so overshoot and reversion, or
-two-stage incorporation, cannot be represented. Two panels of the #6 grid already look like
-overshoot. Diagnosed from residual structure across $\tau$; a systematic pattern is a finding about
-the shape of incorporation, not a fitting problem.
-
-**Contamination inside the window.** $H$ must contain no second scheduled release. This excludes
-FOMC; the same test applies to any release type added later.
-
-**The eventual move is not the release.** $R_e(H)$ contains all news in the window.
-
-**A single baseline tick.** $R_e(\tau)$ is measured from $P_e(0^-)$, one price carrying bid-ask
-bounce. That error is common to every horizon and is largest relative to the signal at $\tau = 1$ s,
-which is the horizon the study most depends on.
-
-**Venue clock.** Binance's timestamps need not agree with the release instant at second resolution.
-
-These belong in `docs/limitations.md` (#11) in a reviewer's phrasing.
-
 ## Validation
 
 The model is fitted to simulated data with known $\lambda$ and must recover it before any release
 data is used. This is simulation-based calibration, not estimation within the meaning of the second
 standing rule, and it is what separates an unidentified parameter from a result.
+
+Where this model breaks is `docs/limitations.md`, in a reviewer's phrasing.

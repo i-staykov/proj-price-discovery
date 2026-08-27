@@ -55,13 +55,31 @@ Exclusion rules are fixed in `PREREGISTRATION.md` before any fit and concern dat
 **Answered**, if the preregistered exclusions hold. A reviewer should check that the merged
 preregistration predates the first estimation commit.
 
+## One hour is a number you chose
+
+*Nothing makes an hour the right terminal horizon. It sits in the denominator of your estimand, so
+every number you report is conditional on it, and you picked it before seeing any data.*
+
+Conceded. One hour is long enough for a macro release to be digested and short enough to limit
+unrelated news, and no sharper argument is available.
+
+Sensitivity to $H \in \{30\,\mathrm{min}, 4\,\mathrm{h}\}$ is preregistered, and the result is
+reported whichever way it falls. The check is not a formality: $H$ enters $\phi$ through
+$1 - e^{-\lambda H}$, so it bites hardest exactly when the half-life is an appreciable fraction of
+$H$, which is the regime the study cannot rule out in advance.
+
+**Structural.** Any endogenous definition of the eventual move needs some horizon.
+
 ## The exponential form is assumed, not tested
 
 *You fit one rate per event. If the price overshoots and reverts, or moves in two stages, a single
 exponential describes neither and you will report a compromise number as though it were a speed.*
 
-Conceded as a real risk. It is diagnosed from residual structure across horizons: systematic
-positive residuals at short $\tau$ and negative at medium $\tau$ indicate overshoot.
+Conceded, and $\phi_e$ is monotone in $\tau$ by construction, so the model cannot represent
+reversion at all. Two panels of the #6 grid already look like overshoot.
+
+Diagnosed from residual structure across horizons: systematic positive residuals at short $\tau$ and
+negative at medium $\tau$.
 
 If the diagnostic fires, that is reported as a finding about the shape of incorporation, not
 repaired by refitting until the residuals look tidy.
