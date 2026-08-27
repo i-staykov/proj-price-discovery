@@ -42,18 +42,29 @@ $$\log \lambda_e \sim \mathcal{N}(\mu, \sigma^2), \qquad
 
 Logarithms because both quantities are positive and plausibly span orders of magnitude.
 
+$\mu$ and $\sigma$ are estimated, not supplied. $\mu$ carries the study's headline answer through
+$\ln 2/\exp(\mu)$; $\sigma$ determines both the degree of shrinkage and whether a single population
+speed exists at all.
+
 Partial pooling is required by the sample: at $E \approx 214$ across the two primary release types
 (`sample.md`), no pooling gives per-event posteriors too diffuse to report, and complete pooling
-forecloses the release-type and year-over-year contrasts. Shrinkage is governed by $\sigma$, which
-is estimated rather than fixed.
+forecloses the release-type and year-over-year contrasts.
+
+No conditional of $\lambda_e$ has a closed form, since $\lambda_e$ enters inside the exponential, so
+the joint posterior over $(\mu, \sigma, \{\lambda_e\}, \{A_e\}, \varsigma)$ is sampled rather than
+solved. Reported intervals are quantiles of the draws.
 
 ## Priors
 
 Fixed in `PREREGISTRATION.md`, not revised afterwards.
 
-$\mu$ is centred on a 10 s half-life ($\log \lambda = -2.7$) with scale 1.5, spanning roughly
-0.5 s to 200 s, consistent with the sub-minute reactions in #6 and permitting slower incorporation.
-$\sigma$ takes a half-normal prior, which admits $\sigma \to 0$; a prior excluding small $\sigma$
+The prior on $\mu$ is centred on a 10 s half-life ($\log \lambda = -2.7$) with scale 1.5, spanning
+roughly 0.5 s to 200 s, consistent with the sub-minute reactions in #6 and permitting slower
+incorporation. Using the kill-check to set this prior is a soft use of nine events to bound a belief
+over 214; it is disclosed in `PREREGISTRATION.md` rather than concealed, and at this sample size the
+posterior on $\mu$ is data-dominated.
+
+The prior on $\sigma$ is half-normal, which admits $\sigma \to 0$; a prior excluding small $\sigma$
 would manufacture heterogeneity. Prior predictive checks precede any fit.
 
 ## Reported quantities

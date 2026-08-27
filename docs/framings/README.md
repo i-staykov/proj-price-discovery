@@ -2,7 +2,8 @@
 
 **Chosen: fraction of the eventual move**, estimated with a Bayesian hierarchical model.
 `fraction-of-move.md` states it, `notation.md` fixes the symbols, `sample.md` gives the event
-counts.
+counts. `model.pdf` in the repository root presents the same model with figures, for a reviewer
+reading it cold.
 
 It measures speed, not completeness, and requires only prices and timestamps. The alternatives below
 each require something unavailable.

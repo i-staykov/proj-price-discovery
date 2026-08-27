@@ -4,6 +4,8 @@ data/
 *.parquet
 .venv/
 
+docs/model/
+
 __pycache__/
 *.py[cod]
 .pytest_cache/
