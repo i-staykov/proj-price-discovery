@@ -68,18 +68,35 @@ repaired by refitting until the residuals look tidy.
 
 **Reducible**, by fitting a two-stage or overshoot-capable alternative and comparing.
 
+## Everything is measured from one tick
+
+*Your returns start at the last price before 08:30:00. That is a single trade, which sits on one
+side of the spread. You have injected a common error into every horizon at once, and it is largest
+relative to the signal at exactly the horizon you care most about.*
+
+No answer, and it is the objection we would raise first. Bid-ask bounce at the baseline shifts the
+whole curve for that event, and at $\tau = 1$ s the accumulated move may be of the same order as the
+spread.
+
+The per-event magnitude parameter absorbs part of it, because a constant offset looks like a
+slightly different $M_e$. What it does not absorb is the distortion at the shortest horizons, where
+the offset is not small relative to $m_e(\tau)$.
+
+**Reducible**, by measuring the baseline as a mid price or a short pre-release average, at the cost
+of a choice about the averaging window that then needs preregistering.
+
 ## One venue, one symbol
 
 *Binance's clock is Binance's. Its matching engine timestamps need not agree with the instant BLS
 published the number, and at one-second resolution that is not a rounding error. You are also
 reporting a property of one exchange as though it were a property of the market.*
 
-No answer on the clock. We cannot verify Binance's timestamps against an independent reference with
-free data, and a systematic offset of a few hundred milliseconds would distort the shortest horizons
+No answer on the clock. Binance's timestamps cannot be verified against an independent reference
+with free data, and an offset of a few hundred milliseconds would distort the shortest horizons
 most, which are the horizons the study is about.
 
-Single-venue is **reducible**: a second symbol or exchange would show whether the curve is a
-property of the venue. It is not in the minimum viable study.
+A second symbol or exchange would show whether the curve is a property of the venue. It is not in
+the minimum viable study.
 
 **Structural** on the clock; **reducible** on the venue.
 
@@ -88,12 +105,11 @@ property of the venue. It is not in the minimum viable study.
 *214 events. Your population spread will be poorly identified, and any subgroup contrast will have
 intervals wide enough to contain no effect and a large one.*
 
-Accepted, and the reason for partial pooling rather than per-event fits. We expect the pooled
-half-life to be reasonably determined and the year-over-year and release-type contrasts to be the
-constrained comparisons.
+Accepted, and the reason for partial pooling rather than per-event fits. The pooled half-life should
+be reasonably determined; the year and release-type contrasts are the constrained comparisons.
 
-A wide interval that is reported as wide is not a failure. An interval narrowed by treating
-overlapping horizons as independent observations would be.
+A wide interval reported as wide is not a failure. An interval narrowed by treating nested horizons
+as independent would be.
 
 **Structural.** The event count is fixed by how often the BLS publishes.
 
@@ -115,8 +131,9 @@ The FOMC robustness check is informative about direction but confounded by const
 *Your one-second return is inside your one-hour return. If the likelihood treats those as
 independent observations, your intervals are too narrow and your result looks sharper than it is.*
 
-Known and accounted for in the likelihood's covariance structure rather than assumed away. This is
-the failure mode where the error presents as a better result, so it is the one a reviewer should
-check first in the estimation code.
+Carried explicitly: the likelihood is multivariate normal with
+$\Sigma_{jk} = \varsigma_e^2 \min(\tau_j, \tau_k)$, not a product of independent terms. This is the
+failure mode where the error presents as a better result, so it is the first thing to check in the
+estimation code.
 
 **Answered**, and worth verifying rather than believing.

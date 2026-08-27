@@ -97,11 +97,11 @@
 
 % ---------------------------------------------------------------- 2
 \begin{frame}{Does it even react? We checked first.}
-\vspace{-0.8em}
+\vspace{-1.0em}
 \begin{center}
-\includegraphics[height=0.58\textheight]{../../figures/spikeGrid.png}
+\includegraphics[height=0.57\textheight]{../../figures/spikeGrid.png}
 \end{center}
-\vspace{0.2em}
+\vspace{0.1em}
 \begin{center}
 \stat{0.28\textwidth}{9 / 9}{dates show a jump}\hfill
 \stat{0.28\textwidth}{5.6$\times$}{median vs.\ a normal day}\hfill
@@ -153,18 +153,14 @@ Of the move the release eventually causes,\\[0.5em]
 \end{tikzpicture}
 \end{column}
 \begin{column}{0.38\textwidth}
-\vspace{1.2em}
+\vspace{0.8em}
 $$\phi(\tau)=\frac{1-e^{-\lambda\tau}}{1-e^{-\lambda H}}$$
-\vspace{0.2em}
-
-One number per event: \lead{$\lambda$}.\\
-{\scriptsize\color{muted}The denominator makes $\phi(H)$ exactly 1. For fast rates it is 1 to
-machine precision.}
-\vspace{0.7em}
-
-We report its half-life
-$$\tau_{1/2}=\frac{\ln 2}{\lambda}$$
 \vspace{0.1em}
+
+One number per event: \lead{$\lambda$},\\
+reported as a half-life
+$$\tau_{1/2}=\frac{\ln 2}{\lambda}$$
+\vspace{-0.2em}
 
 {\color{muted}\small ``half the move happened in 6.9 seconds'' --- a sentence you can argue with.}
 \end{column}
@@ -211,36 +207,36 @@ $$\tau_{1/2}=\frac{\ln 2}{\lambda}$$
    that you never had before it.};
 \end{tikzpicture}
 \end{center}
-\vspace{1.6em}
+\vspace{1.4em}
 \begin{center}
-{\color{muted}It is the fastest route to a clean-looking wrong answer,\\
-and the first thing a reviewer will look for.}
+{\color{muted}The fastest route to a clean-looking wrong answer,\\
+and the first thing a reviewer looks for.}
 \end{center}
 \end{frame}
 
 % ---------------------------------------------------------------- 7
 \begin{frame}{So we never divide}
-\vspace{0.8em}
+\vspace{0.5em}
 \begin{center}
 {\large Give every event \lead{two} parameters instead of one.}
 \end{center}
-\vspace{1.0em}
+\vspace{0.7em}
 \begin{center}
 \begin{tikzpicture}[font=\small]
-\node[draw,rounded corners,fill=wash,inner sep=11pt,text width=4.6cm,align=center] (A)
-  {\lead{$M_e$}\ \ size of the move\\[0.3em]{\color{muted}how big was the news}\\[0.2em]{\color{muted}\itshape don't care}};
-\node[draw=accent,line width=1.2pt,rounded corners,fill=accent!8,inner sep=11pt,text width=4.6cm,align=center,right=1.4cm of A] (L)
-  {\lead{$\lambda_e$}\ \ rate\\[0.3em]{\color{muted}how fast it was absorbed}\\[0.2em]{\color{accent}\itshape the answer}};
+\node[draw,rounded corners,fill=wash,inner sep=9pt,text width=4.4cm,align=center] (A)
+  {\lead{$M_e$}\ \ size of the move\\[0.2em]{\color{muted}\itshape don't care}};
+\node[draw=accent,line width=1.2pt,rounded corners,fill=accent!8,inner sep=9pt,text width=4.4cm,align=center,right=1.4cm of A] (L)
+  {\lead{$\lambda_e$}\ \ rate\\[0.2em]{\color{accent}\itshape the answer}};
 \end{tikzpicture}
 \end{center}
-\vspace{0.9em}
+\vspace{0.6em}
 $$m_e(\tau)=M_e\,\frac{1-e^{-\lambda_e\tau}}{1-e^{-\lambda_e H}}
 \qquad\Longrightarrow\qquad
-\phi_e(\tau)=\frac{\ \sout{M_e}\,\dfrac{1-e^{-\lambda_e\tau}}{1-e^{-\lambda_e H}}}{\sout{M_e}}$$
-\vspace{0.3em}
+\phi_e(\tau)=\frac{1-e^{-\lambda_e\tau}}{1-e^{-\lambda_e H}}$$
+\vspace{0.1em}
 \begin{center}
-\ok{The size cancels on paper.} A dull event now gives a \emph{wide} answer,\\
-{\color{muted}which is the honest response to weak evidence. Nothing is dropped.}
+\ok{The size cancels.} A dull event now gives a \emph{wide} answer\\
+{\color{muted}instead of a divergent one. Nothing is dropped.}
 \end{center}
 \end{frame}
 
@@ -249,11 +245,11 @@ $$m_e(\tau)=M_e\,\frac{1-e^{-\lambda_e\tau}}{1-e^{-\lambda_e H}}
 \vspace{0.6em}
 \begin{center}
 \begin{tikzpicture}[font=\small]
-\node[draw,rounded corners,fill=wash,inner sep=10pt,text width=3.5cm,align=center] (n)
+\node[draw,rounded corners,fill=wash,inner sep=9pt,text width=3.3cm,align=center] (n)
   {\textbf{No pooling}\\[0.4em]fit each event alone\\[0.5em]\bad{214 shrugs}\\{\color{muted}\scriptsize every interval useless}};
-\node[draw,rounded corners,fill=wash,inner sep=10pt,text width=3.5cm,align=center,right=0.7cm of n] (c)
+\node[draw,rounded corners,fill=wash,inner sep=9pt,text width=3.3cm,align=center,right=0.7cm of n] (c)
   {\textbf{Complete pooling}\\[0.4em]one $\lambda$ for all\\[0.5em]\bad{one number}\\{\color{muted}\scriptsize CPI vs FOMC? 2017 vs 2026?}};
-\node[draw=good,line width=1.4pt,rounded corners,fill=good!8,inner sep=10pt,text width=3.5cm,align=center,right=0.7cm of c] (p)
+\node[draw=good,line width=1.4pt,rounded corners,fill=good!8,inner sep=9pt,text width=3.3cm,align=center,right=0.7cm of c] (p)
   {\textbf{Partial pooling}\\[0.4em]own rate, shared family\\[0.5em]\ok{both}\\{\color{muted}\scriptsize and it self-tunes}};
 \end{tikzpicture}
 \end{center}
@@ -263,13 +259,13 @@ $$\log\lambda_e\ \sim\ \mathcal{N}(\mu,\ \sigma^2)$$
 \end{center}
 \vspace{0.4em}
 \begin{center}
-{\color{muted}Every event keeps its own rate --- and all the rates come from one family.}
+{\color{muted}Own rate per event. All rates from one family.}
 \end{center}
 \end{frame}
 
 % ---------------------------------------------------------------- 9
 \begin{frame}{Shrinkage, and why it is not a hack}
-\vspace{0.4em}
+\vspace{0.2em}
 \begin{columns}[T,onlytextwidth]
 \begin{column}{0.46\textwidth}
 \vspace{0.8em}
@@ -281,7 +277,7 @@ $$\log\lambda_e\ \sim\ \mathcal{N}(\mu,\ \sigma^2)$$
 \end{column}
 \begin{column}{0.5\textwidth}
 \centering
-\begin{tikzpicture}[font=\scriptsize]
+\begin{tikzpicture}[font=\scriptsize,scale=0.92,every node/.style={transform shape}]
 \fill[wash,rounded corners] (-0.3,-0.6) rectangle (6.0,3.9);
 \node[muted,font=\tiny,anchor=west] at (0.1,3.62) {grey: event on its own};
 \node[good,font=\tiny,anchor=west] at (3.1,3.62) {green: after pooling};
@@ -297,11 +293,11 @@ $$\log\lambda_e\ \sim\ \mathcal{N}(\mu,\ \sigma^2)$$
 \end{tikzpicture}
 \end{column}
 \end{columns}
-\vspace{0.9em}
+\vspace{0.7em}
 \begin{center}
 \begin{tikzpicture}
-\node[draw=accent,line width=1.1pt,rounded corners,fill=accent!6,inner sep=9pt,text width=0.82\textwidth,align=center]
-  {\lead{$\sigma$ is estimated too.}\ \ Events really differ $\Rightarrow$ $\sigma$ grows, pooling weakens.\\
+\node[draw=accent,line width=1.1pt,rounded corners,fill=accent!6,inner sep=8pt,text width=0.82\textwidth,align=center]
+  {\lead{$\sigma$ is estimated too.}\ \ Events differ $\Rightarrow$ $\sigma$ grows, pooling weakens.\\
    Events are alike $\Rightarrow$ $\sigma$ shrinks, pooling strengthens.
    {\color{muted}The data decides.}};
 \end{tikzpicture}

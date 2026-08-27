@@ -4,120 +4,125 @@ Symbols in `notation.md`.
 
 ## Estimand
 
-Write $m_e(\tau) = \mathbb{E}[R_e(\tau)]$ for the systematic component of the response, the part
-attributable to the release rather than to whatever else arrived in the window. The estimand is
+Write $m_e(\tau) = \mathbb{E}[R_e(\tau)]$ for the systematic component of the response. The estimand
+is
 
 $$\phi_e(\tau) = \frac{m_e(\tau)}{m_e(H)}$$
 
-reported at the horizons in $\mathcal{T}$ with credible intervals, and summarised by the population
+reported at the horizons in $\mathcal{T}$ with credible intervals and summarised by the population
 half-life.
 
-It is a ratio of expectations, not of realised returns. $\mathbb{E}[R_e(\tau)/R_e(H)]$ is a
-different quantity and an unusable one: the denominator is a noisy observation that approaches zero
-for uninformative releases. $\phi_e$ is a deterministic function of the model parameters, so no
-division by data occurs at any point.
+A ratio of expectations, not of realised returns. $\mathbb{E}[R_e(\tau)/R_e(H)]$ is a different and
+unusable quantity, since its denominator is an observation that approaches zero for uninformative
+releases. $\phi_e$ is a function of parameters alone, so nothing divides by data.
 
-$\phi_e(H) = 1$ by construction. The framing measures the speed of convergence to a destination it
-defines, and makes no claim that the destination is the efficient price.
+$\phi_e(H) = 1$ by construction: the framing measures speed of convergence to a destination it
+defines and makes no claim that the destination is the efficient price.
 
-The estimand requires that no second scheduled information event falls inside $(0, H]$. FOMC
-statements fail this: the chair's press conference begins at 14:30 ET, 30 minutes into a one-hour
-window, and has followed every meeting since 2019. The primary sample is therefore CPI and the
-Employment Situation, both at 08:30 ET with nothing scheduled behind them. ADR 0002 records the
-decision and the rejected alternatives.
+No second scheduled release may fall inside $(0, H]$. FOMC statements fail this, since the chair's
+press conference begins at 14:30 ET and has followed every meeting since 2019. The primary sample is
+CPI and the Employment Situation, both at 08:30 ET. ADR 0002 records the decision.
 
 ## Model
 
-Response magnitude and speed are separated, so that the quantity of interest does not depend on how
-large the release's effect happened to be:
+Magnitude and speed are separated so that the quantity of interest does not depend on how large the
+release's effect happened to be:
 
 $$m_e(\tau) = M_e\,\frac{1 - e^{-\lambda_e \tau}}{1 - e^{-\lambda_e H}},
-\qquad\text{hence}\qquad
+\qquad
 \phi_e(\tau) = \frac{1 - e^{-\lambda_e \tau}}{1 - e^{-\lambda_e H}}$$
 
-$M_e = m_e(H)$ is the expected move at the terminal horizon and cancels algebraically, leaving
-$\phi_e$ a function of $\lambda_e$ and $H$ alone. A release with a small $M_e$ therefore yields a
-diffuse posterior on $\lambda_e$ rather than a divergent ratio, and no event is excluded for being
-uninformative.
+$M_e = m_e(H)$ cancels algebraically. A release with small $M_e$ yields a diffuse posterior on
+$\lambda_e$ rather than a divergent ratio, and no event is excluded for being uninformative.
 
-The denominator $1 - e^{-\lambda_e H}$ is a smooth function of a parameter, bounded in $(0,1)$, not
-an observation. It is what makes $\phi_e(H) = 1$ hold exactly rather than only in the limit
-$\tau \to \infty$. For fast incorporation it is numerically indistinguishable from 1: at a 10-second
-half-life and $H$ = 1 hour, $\lambda_e H \approx 250$. It departs from 1 only when the half-life
-approaches $H$ itself, where it reaches 1.33 at 30 minutes and 2 at an hour, so the correction
-matters exactly in the regime the study cannot rule out in advance.
+The denominator is a function of a parameter, bounded in $(0,1)$, not an observation. It makes
+$\phi_e(H) = 1$ exact rather than asymptotic. At a 10 s half-life and $H$ = 1 h it is 1 to machine
+precision, since $\lambda_e H \approx 250$; it reaches 1.33 at a 30 min half-life and 2 at an hour.
+The correction matters precisely where the study cannot assume its own answer.
 
-The parameterisation in terms of $M_e$ rather than the asymptote $A_e = M_e/(1-e^{-\lambda_e H})$ is
-deliberate. $M_e$ refers to a horizon inside the data; $A_e$ is extrapolated from a functional form
-that may be wrong, and is meaningless if it is.
+$M_e$ rather than the asymptote $A_e = M_e/(1 - e^{-\lambda_e H})$ because $M_e$ refers to a horizon
+inside the data, while $A_e$ is extrapolated from a functional form that may be wrong.
 
-Observation model, at each $\tau_k \in \mathcal{T}$:
+### Observation model
 
-$$R_e(\tau_k) \sim \mathcal{N}\!\left(m_e(\tau_k),\ \varsigma^2 \tau_k\right)$$
+The horizons are nested, so the returns are not independent. Under a random-walk background the
+joint distribution over the grid is
 
-Variance proportional to $\tau_k$ follows from independent increments in the background process.
-Homoscedastic errors would weight hour-scale noise equally with second-scale signal.
+$$\mathbf{R}_e \sim \mathcal{N}\!\left(\mathbf{m}_e,\ \Sigma\right),
+\qquad \Sigma_{jk} = \varsigma_e^2 \min(\tau_j, \tau_k)$$
 
-Population level:
+Variance grows with the horizon because the background accumulates. Ignoring the off-diagonal terms
+treats each horizon as fresh evidence and narrows the intervals, which is the error that presents as
+a sharper result.
+
+$\varsigma_e$ varies by event rather than being shared. Crypto volatility differs by an order of
+magnitude between 2017 and 2022, and a single scale would force the model to reconcile them by
+distorting $\lambda_e$.
+
+### Population level
 
 $$\log \lambda_e \sim \mathcal{N}(\mu, \sigma^2), \qquad
 \log |M_e| \sim \mathcal{N}(\mu_M, \sigma_M^2), \quad \operatorname{sign}(M_e) \text{ free}$$
 
-Logarithms because both quantities are positive and plausibly span orders of magnitude.
+Logarithms because both quantities are positive and span orders of magnitude.
 
-$\mu$ and $\sigma$ are estimated, not supplied. $\mu$ carries the study's headline answer through
-$\ln 2/\exp(\mu)$; $\sigma$ determines both the degree of shrinkage and whether a single population
-speed exists at all.
+$\mu$ and $\sigma$ are estimated, not supplied. $\mu$ carries the headline answer through
+$\ln 2/\exp(\mu)$; $\sigma$ sets the degree of shrinkage and answers whether a single population
+speed exists.
 
-Partial pooling is required by the sample: at $E \approx 214$ across the two primary release types
-(`sample.md`), no pooling gives per-event posteriors too diffuse to report, and complete pooling
-forecloses the release-type and year-over-year contrasts.
+Partial pooling is required by the sample: at $E \approx 214$ (`sample.md`) no pooling gives
+per-event posteriors too diffuse to report, and complete pooling forecloses the release-type and
+year contrasts.
+
+The hierarchy is written non-centred, $\log\lambda_e = \mu + \sigma z_e$ with
+$z_e \sim \mathcal{N}(0,1)$. Events with small $M_e$ carry almost no information about their own
+rate, so the centred form has a funnel geometry that Hamiltonian Monte Carlo samples badly. Divergent
+transitions are treated as a failed fit, not a diagnostic to be relaxed away.
 
 No conditional of $\lambda_e$ has a closed form, since $\lambda_e$ enters inside the exponential, so
-the joint posterior over $(\mu, \sigma, \{\lambda_e\}, \{M_e\}, \varsigma)$ is sampled rather than
-solved. Reported intervals are quantiles of the draws.
+the joint posterior is sampled. Reported intervals are quantiles of the draws.
 
 ## Priors
 
 Fixed in `PREREGISTRATION.md`, not revised afterwards.
 
-The prior on $\mu$ is centred on a 10 s half-life ($\log \lambda = -2.7$) with scale 1.5, spanning
-roughly 0.5 s to 200 s, consistent with the sub-minute reactions in #6 and permitting slower
-incorporation. Using the kill-check to set this prior is a soft use of nine events to bound a belief
-over 214; it is disclosed in `PREREGISTRATION.md` rather than concealed, and at this sample size the
+The prior on $\mu$ is centred on a 10 s half-life ($\log\lambda = -2.7$) with scale 1.5, spanning
+roughly 0.5 s to 200 s at two standard deviations. Using #6 to set it is a soft use of nine events
+to bound a belief over 214; it is disclosed in `PREREGISTRATION.md`, and at this sample size the
 posterior on $\mu$ is data-dominated.
 
-The prior on $\sigma$ is half-normal, which admits $\sigma \to 0$; a prior excluding small $\sigma$
-would manufacture heterogeneity. Prior predictive checks precede any fit.
+The prior on $\sigma$ is half-normal, admitting $\sigma \to 0$. A prior excluding small $\sigma$
+would manufacture heterogeneity.
+
+Prior predictive checks precede any fit.
 
 ## Reported quantities
 
 - $\phi(\tau)$ at each horizon with a 95% band. Axes: seconds since release (log scale), fraction of
   eventual move (dimensionless).
 - Population half-life $\ln 2 / \exp(\mu)$ in seconds, with an interval.
-- $\sigma$. A large $\sigma$ is a result: it means incorporation speed is a distribution rather than
-  a constant.
+- $\sigma$. A large $\sigma$ is a result: incorporation speed is a distribution, not a constant.
 - Release-type and year contrasts on $\mu$, as group effects in the same model.
 
 ## Failure modes
 
-**$H$ is a choice.** If $\phi(\tau)$ at fixed $\tau$ moves materially under $H \in \{30\,\mathrm{min},
-4\,\mathrm{h}\}$, the result is a function of an arbitrary constant and the sensitivity is reported.
-$H$ enters the estimand explicitly through the denominator, so this check is not cosmetic: it is
-material whenever the half-life is an appreciable fraction of $H$.
+**$H$ is a choice.** It enters the estimand through the denominator, so sensitivity to
+$H \in \{30\,\mathrm{min}, 4\,\mathrm{h}\}$ is material whenever the half-life is an appreciable
+fraction of $H$, not a formality. Reported either way.
 
-**Contamination inside the window.** $H$ must contain no second scheduled release. This is why FOMC
-is excluded from the primary sample; the same test applies to any release type added later.
+**Exponential form.** $\phi_e$ is monotone in $\tau$ by construction, so overshoot and reversion, or
+two-stage incorporation, cannot be represented. Two panels of the #6 grid already look like
+overshoot. Diagnosed from residual structure across $\tau$; a systematic pattern is a finding about
+the shape of incorporation, not a fitting problem.
 
-**Exponential form.** Overshoot and reversion, or two-stage incorporation, are not representable by
-a single rate. Diagnosed from residual structure across $\tau$; a systematic pattern is a finding,
-not a fitting problem.
+**Contamination inside the window.** $H$ must contain no second scheduled release. This excludes
+FOMC; the same test applies to any release type added later.
 
 **The eventual move is not the release.** $R_e(H)$ contains all news in the window.
 
-**Overlapping horizons.** $R_e(\tau_k)$ is nested in $R_e(\tau_{k+1})$, so the observations are
-mechanically dependent. The likelihood must carry that covariance; treating horizons as independent
-narrows the intervals and the error presents as a sharper result.
+**A single baseline tick.** $R_e(\tau)$ is measured from $P_e(0^-)$, one price carrying bid-ask
+bounce. That error is common to every horizon and is largest relative to the signal at $\tau = 1$ s,
+which is the horizon the study most depends on.
 
 **Venue clock.** Binance's timestamps need not agree with the release instant at second resolution.
 
