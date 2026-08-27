@@ -158,8 +158,8 @@ $$\phi(\tau)=\frac{1-e^{-\lambda\tau}}{1-e^{-\lambda H}}$$
 \vspace{0.1em}
 
 One number per event: \lead{$\lambda$},\\
-reported as a half-life
-$$\tau_{1/2}=\frac{\ln 2}{\lambda}$$
+reported as the time to get halfway
+$$\tau_{1/2}=\frac{1}{\lambda}\ln\frac{2}{1+e^{-\lambda H}}$$
 \vspace{-0.2em}
 
 {\color{muted}\small ``half the move happened in 6.9 seconds'' --- a sentence you can argue with.}
@@ -361,7 +361,7 @@ The link through $\mu,\sigma$ is how one event's data informs another's estimate
 \node[draw=warn,line width=1.1pt,rounded corners,fill=warn!8,inner sep=9pt,text width=4.7cm,align=left,below=0.35cm of a] (b)
   {$\lambda_e$ given $M_e$\hfill\bad{none}\\[0.2em]{\color{muted}\scriptsize $\lambda$ sits inside $e^{-\lambda\tau}$}};
 \node[draw=warn,line width=1.1pt,rounded corners,fill=warn!8,inner sep=9pt,text width=4.7cm,align=left,below=0.35cm of b] (c)
-  {the joint posterior\hfill\bad{none}\\[0.2em]{\color{muted}\scriptsize 400+ parameters, no name}};
+  {the joint posterior\hfill\bad{none}\\[0.2em]{\color{muted}\scriptsize $\sim$650 parameters, no name}};
 \node[right=1.0cm of b,text width=5.0cm,align=left] (x)
   {\lead{So we sample it.}\\[0.6em]
    Hamiltonian Monte Carlo draws from the posterior without ever writing it down.\\[0.6em]
@@ -391,7 +391,7 @@ The link through $\mu,\sigma$ is how one event's data informs another's estimate
 \centering
 \vspace{0.7em}
 {\fontsize{30}{32}\selectfont\bfseries\color{accent}$\tau_{1/2}$}\\[0.6em]
-{\small\textbf{one number}}\\{\scriptsize\color{muted}half-life in seconds,\\with an interval}
+{\small\textbf{one number}}\\{\scriptsize\color{muted}time to get halfway,\\in seconds, with an interval}
 \end{column}
 \begin{column}{0.31\textwidth}
 \centering

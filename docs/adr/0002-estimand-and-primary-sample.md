@@ -17,8 +17,8 @@ belief-updating framing requires treating the price as a conditional expectation
 
 The estimand is the incorporation curve $\phi(\tau) = m(\tau)/m(H)$, where $m(\tau)$ is the expected
 return at event time $\tau$: the fraction of the eventual move realised by $\tau$, reported at 1 s,
-10 s, 1 min, 10 min and 1 h with 95% credible intervals, and summarised by the population half-life
-in seconds.
+10 s, 1 min, 10 min and 1 h with 95% credible intervals, and summarised by the population half-time,
+the $\tau$ at which $\phi(\tau) = 1/2$.
 
 It is a ratio of expectations rather than of realised returns, so that no division by a noisy
 observation occurs anywhere.
@@ -43,9 +43,15 @@ on the outcome. Avoided structurally by not forming the ratio.
 
 **Normalising by the asymptote rather than by $m(H)$.** Writing the curve as $A(1 - e^{-\lambda\tau})$
 makes $\phi$ the fraction of the $\tau \to \infty$ limit, which equals 1 only in that limit and not
-at $H$. The two agree to machine precision when the half-life is seconds, and differ by a factor of
-1.33 at a 30-minute half-life and 2 at an hour. Since the study cannot assume its own answer, the
-denominator is $1 - e^{-\lambda H}$ and $\phi(H) = 1$ holds exactly.
+at $H$. The two agree to machine precision when the half-time is seconds, and differ by a factor of
+1.33 at 30 minutes and 2 at an hour. Since the study cannot assume its own answer, the denominator
+is $1 - e^{-\lambda H}$ and $\phi(H) = 1$ holds exactly.
+
+**Summarising by $\ln 2/\lambda$.** That is the half-life of the unnormalised exponential, and it
+solves $\phi(\tau) = 1/2$ only as $H \to \infty$. The reported half-time solves it exactly, at
+$\tau_{1/2} = \lambda^{-1}\ln\left(2/(1 + e^{-\lambda H})\right)$. The two coincide for fast rates
+and diverge badly for slow ones: at $\ln 2/\lambda = H$, the curve has already reached
+$\phi = 1$, not $1/2$.
 
 **FOMC in the primary sample.** The statement is released at 14:00 ET and the chair's press
 conference begins at 14:30, inside the one-hour window, at every meeting since 2019. $R_e(H)$ would

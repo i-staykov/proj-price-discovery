@@ -13,7 +13,7 @@
 | $\mathcal{T}$ | horizon grid $\{1\,\mathrm{s}, 10\,\mathrm{s}, 1\,\mathrm{min}, 10\,\mathrm{min}, 1\,\mathrm{h}\}$ |
 | $\phi_e(\tau) = m_e(\tau)/m_e(H)$ | fraction of the eventual move realised by $\tau$ |
 | $\lambda_e$ | incorporation rate, $\mathrm{s}^{-1}$ |
-| $\tau^{1/2}_e = \ln 2 / \lambda_e$ | half-life, seconds |
+| $\tau^{1/2}_e$ | half-time: the $\tau$ at which $\phi_e(\tau) = 1/2$, seconds |
 | $\mu, \sigma$ | population mean and standard deviation of $\log \lambda_e$ |
 | $\varsigma$ | background volatility scale |
 

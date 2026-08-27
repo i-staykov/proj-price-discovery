@@ -10,7 +10,7 @@ is
 $$\phi_e(\tau) = \frac{m_e(\tau)}{m_e(H)}$$
 
 reported at the horizons in $\mathcal{T}$ with credible intervals and summarised by the population
-half-life.
+half-time.
 
 A ratio of expectations, not of realised returns. $\mathbb{E}[R_e(\tau)/R_e(H)]$ is a different and
 unusable quantity, since its denominator is an observation that approaches zero for uninformative
@@ -36,8 +36,9 @@ $M_e = m_e(H)$ cancels algebraically. A release with small $M_e$ yields a diffus
 $\lambda_e$ rather than a divergent ratio, and no event is excluded for being uninformative.
 
 The denominator is a function of a parameter, bounded in $(0,1)$, not an observation. It makes
-$\phi_e(H) = 1$ exact rather than asymptotic. At a 10 s half-life and $H$ = 1 h it is 1 to machine
-precision, since $\lambda_e H \approx 250$; it reaches 1.33 at a 30 min half-life and 2 at an hour.
+$\phi_e(H) = 1$ exact rather than asymptotic. At a 10 s half-time and $H$ = 1 h it is 1 to machine
+precision, since $\lambda_e H \approx 250$; it reaches 1.33 when $\ln 2/\lambda_e$ is 30 min and 2 at
+an hour.
 The correction matters precisely where the study cannot assume its own answer.
 
 $M_e$ rather than the asymptote $A_e = M_e/(1 - e^{-\lambda_e H})$ because $M_e$ refers to a horizon
@@ -66,8 +67,8 @@ $$\log \lambda_e \sim \mathcal{N}(\mu, \sigma^2), \qquad
 
 Logarithms because both quantities are positive and span orders of magnitude.
 
-$\mu$ and $\sigma$ are estimated, not supplied. $\mu$ carries the headline answer through
-$\ln 2/\exp(\mu)$; $\sigma$ sets the degree of shrinkage and answers whether a single population
+$\mu$ and $\sigma$ are estimated, not supplied. $\mu$ carries the headline answer through the
+population half-time; $\sigma$ sets the degree of shrinkage and answers whether a single population
 speed exists.
 
 Partial pooling is required by the sample: at $E \approx 214$ (`sample.md`) no pooling gives
@@ -91,9 +92,21 @@ afterwards, which is why they live there rather than here.
 
 - $\phi(\tau)$ at each horizon with a 95% band. Axes: seconds since release (log scale), fraction of
   eventual move (dimensionless).
-- Population half-life $\ln 2 / \exp(\mu)$ in seconds, with an interval.
+- The population half-time in seconds, with an interval.
 - $\sigma$. A large $\sigma$ is a result: incorporation speed is a distribution, not a constant.
 - Release-type and year contrasts on $\mu$, as group effects in the same model.
+
+The half-time is the $\tau$ at which half the eventual move has occurred, $\phi(\tau) = 1/2$:
+
+$$\tau_{1/2}(\lambda) = \frac{1}{\lambda}\,\ln\frac{2}{1 + e^{-\lambda H}}$$
+
+not $\ln 2/\lambda$, which is the half-life of the unnormalised exponential and answers a question
+about the asymptote rather than about the move at $H$. The two agree to four decimal places for
+half-times up to five minutes and diverge beyond: at $\ln 2/\lambda = 1$ h they differ by a factor of
+2.4, and $\phi(\ln 2 / \lambda) = 1$ rather than $1/2$.
+
+It is computed per posterior draw from $\exp(\mu)$ and reported as a posterior quantity, not as a
+transform of a point estimate.
 
 ## Validation
 
