@@ -16,13 +16,6 @@ test:
 
 check: lint test
 
-# model.pdf is committed; its source is not. Rebuilding requires docs/model/model.tex,
-# which only exists in the author's working tree. See #21.
-model:
-    cd docs/model && pdflatex -interaction=nonstopmode -halt-on-error model.tex
-    cd docs/model && pdflatex -interaction=nonstopmode -halt-on-error model.tex
-    cp docs/model/model.pdf model.pdf
-
 # Regenerates every figure and every number quoted in the README from raw data.
 # Nothing may be typed into the README by hand.
 results:

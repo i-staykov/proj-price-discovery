@@ -4,7 +4,13 @@ data/
 *.parquet
 .venv/
 
-docs/model/
+# LaTeX build artifacts. docs/model/model.tex and model.pdf are committed.
+docs/model/*.aux
+docs/model/*.log
+docs/model/*.out
+docs/model/*.nav
+docs/model/*.snm
+docs/model/*.toc
 
 __pycache__/
 *.py[cod]
