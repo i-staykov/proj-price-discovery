@@ -33,10 +33,10 @@ CPI and the Employment Situation, 214 events. Both release at 08:30 ET with no s
 release inside the one-hour window.
 
 FOMC is excluded from the primary sample and retained as a robustness check: the chair's press
-conference at 14:30 ET falls inside the window, so $R_e(H)$ would measure the statement and the
+conference at 14:30 ET falls inside the window, so $m_e(H)$ would measure the statement and the
 press conference jointly. ADR 0002 carries the argument.
 
 At $E = 214$ the population spread $\sigma$ in `fraction-of-move.md` is identified but not
 precisely: the year and release-type contrasts are the constrained comparisons, not the pooled
-half-life. Dropping events after inspecting them is excluded; exclusion rules are fixed in
+half-time. Dropping events after inspecting them is excluded; exclusion rules are fixed in
 `PREREGISTRATION.md`.
