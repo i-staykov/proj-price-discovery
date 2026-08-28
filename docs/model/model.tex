@@ -370,7 +370,102 @@ The link through $\mu,\sigma$ is how one event's data informs another's estimate
 \end{center}
 \end{frame}
 
+% ---------------------------------------------------------------- 12
+\begin{frame}{The output is a table, not an answer}
+\vspace{0.5em}
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize]
+\fill[wash,rounded corners] (-0.2,-0.3) rectangle (7.2,2.75);
+\node[font=\scriptsize\bfseries] at (0.6,2.45) {draw};
+\node[font=\scriptsize\bfseries] at (2.0,2.45) {$\mu$};
+\node[font=\scriptsize\bfseries] at (3.4,2.45) {$\sigma$};
+\node[font=\scriptsize\bfseries] at (4.8,2.45) {$\lambda_{17}$};
+\node[font=\scriptsize\bfseries,color=muted] at (6.3,2.45) {$\dots$ 650 cols};
+\draw[muted] (-0.0,2.2) -- (7.0,2.2);
+\foreach \r/\y/\m/\s/\l in {1/1.85/-2.61/0.83/0.071, 2/1.35/-2.48/0.91/0.065, 3/0.85/-2.73/0.79/0.088}
+  {\node at (0.6,\y) {\r}; \node at (2.0,\y) {\m}; \node at (3.4,\y) {\s}; \node at (4.8,\y) {\l};}
+\node[color=muted] at (0.6,0.35) {$\vdots$};
+\node[color=muted] at (2.0,0.35) {$\vdots$};
+\node[color=muted] at (3.4,0.35) {$\vdots$};
+\node[color=muted] at (4.8,0.35) {$\vdots$};
+\node[color=muted,font=\scriptsize] at (0.6,-0.05) {8000};
+\end{tikzpicture}
+\end{center}
+\vspace{0.4em}
+\begin{center}
+Each row is \lead{one complete, self-consistent guess} at every parameter at once.\\[0.5em]
+{\color{muted}Population half-time? Transform the $\mu$ column, sort, read off the 2.5th and 97.5th
+percentile. Every reported number is a summary of this table.}
+\end{center}
+\end{frame}
+
 % ---------------------------------------------------------------- 13
+\begin{frame}{First we fit data we made up ourselves}
+\vspace{0.4em}
+\begin{center}
+\begin{tikzpicture}[font=\scriptsize,node distance=0.42cm,>={Latex[length=1.8mm]}]
+\node[draw,rounded corners,fill=wash,inner sep=6pt,text width=2.5cm,align=center] (a)
+  {pick a true\\half-time, say \lead{8 s}};
+\node[draw,rounded corners,fill=wash,inner sep=6pt,text width=2.5cm,align=center,right=of a] (b)
+  {simulate 214\\fake events};
+\node[draw,rounded corners,fill=wash,inner sep=6pt,text width=2.5cm,align=center,right=of b] (c)
+  {fit as if it\\were real};
+\node[draw=accent,line width=1.1pt,rounded corners,fill=accent!8,inner sep=6pt,text width=2.7cm,align=center,right=of c] (d)
+  {does the interval\\contain \lead{8 s}?};
+\draw[->,muted] (a)--(b); \draw[->,muted] (b)--(c); \draw[->,accent] (c)--(d);
+\end{tikzpicture}
+\end{center}
+\vspace{0.5em}
+\begin{center}
+Repeat 100 times. Honest intervals contain the truth \lead{about 95 times}.\\
+{\color{muted}Preregistered criterion: coverage in [90\%, 99\%].}
+\end{center}
+\vspace{0.7em}
+\begin{center}
+\begin{tikzpicture}
+\node[draw=warn,line width=1.1pt,rounded corners,fill=warn!8,inner sep=8pt,text width=0.86\textwidth,align=center,font=\small]
+  {\bad{Why this and not a sanity check.} Get the nested-horizon covariance wrong and
+   the intervals come out half as wide as they should be.\\
+   On real data that looks like an \emph{excellent} result. Here, coverage collapses and the bug
+   is unmissable.};
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
+% ---------------------------------------------------------------- 14
+\begin{frame}{Written down before we look}
+\vspace{0.5em}
+\begin{columns}[T,onlytextwidth]
+\begin{column}{0.48\textwidth}
+{\color{accent}\bfseries Fixed in \texttt{PREREGISTRATION.md}}
+\vspace{0.5em}
+\begin{itemize}\setlength\itemsep{0.35em}\small
+\item every prior, with its argument
+\item the sample and its date range
+\item which events may be dropped, and why
+\item all seven robustness checks
+\item \lead{the result that would falsify us}
+\end{itemize}
+\end{column}
+\begin{column}{0.48\textwidth}
+{\color{warn}\bfseries What that forecloses}
+\vspace{0.5em}
+\begin{itemize}\setlength\itemsep{0.35em}\small
+\item dropping events that spoil the answer
+\item widening the horizon until it works
+\item a robustness check found afterwards, presented as planned
+\item reporting a null quietly
+\end{itemize}
+\end{column}
+\end{columns}
+\vspace{1.0em}
+\begin{center}
+{\color{muted}Merged on its own, before any estimation code exists.\\
+The commit timestamp is what makes the rest of this checkable.}
+\end{center}
+\end{frame}
+
+% ---------------------------------------------------------------- 15
 \begin{frame}{What we will report}
 \vspace{0.8em}
 \begin{columns}[T,onlytextwidth]
