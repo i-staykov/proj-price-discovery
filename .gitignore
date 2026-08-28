@@ -4,6 +4,17 @@ data/
 *.parquet
 .venv/
 
+# LaTeX build artifacts. docs/model/model.tex and model.pdf are committed.
+docs/model/*.aux
+docs/model/*.log
+docs/model/*.out
+docs/model/*.nav
+docs/model/*.snm
+docs/model/*.toc
+docs/model/*.fls
+docs/model/*.fdb_latexmk
+docs/model/*.synctex.gz
+
 __pycache__/
 *.py[cod]
 .pytest_cache/

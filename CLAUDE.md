@@ -66,6 +66,39 @@ engage with their own work. Enforce it in review, without exception.
 - No emoji in code, commit messages or ADRs. The README status line may use one marker, no more.
 - Bold marks the load-bearing claim in a paragraph, not three words a line.
 
+### Length
+
+Length is a failure mode of its own. Text nobody finishes is text nobody follows, so a rule stated
+at length is weaker than the same rule stated in a line.
+
+- An issue is at most fifteen lines: a question, a Definition of Done, and anything a reader could
+  not work out alone. If it needs more, it is two issues.
+- A pull request body is at most ten lines.
+- A document says a thing once. Saying it in an introduction and again in a summary is saying it
+  zero times, because the reader learns to skim both.
+- Given two drafts with the same content, the shorter one is correct. Cut until removing another
+  sentence would lose something, then stop.
+
+The exception is derivation. A modelling argument may run long, because each line does work. Length
+is a fault only when it is padding.
+
+### Register
+
+**Everything committed here is production.** It is written for a competent reader who does not need
+the underlying concepts taught to them, and it is the version an employer or a reviewer will read.
+
+No teaching in the repository. No toy example carried through to show how a formula behaves, no
+"recall that", no motivating analogy, no paragraph explaining why the obvious estimator is biased
+when naming the bias is enough. State the model, state the assumption, state what breaks it.
+
+The distinction is between justifying a choice and explaining it. Justification stays: a reviewer
+must see why partial pooling rather than none, and the answer is one sentence about the event count.
+Explaining what partial pooling is belongs elsewhere.
+
+Learning material, walkthroughs and presentations live outside the repository. They are useful and
+they are not this artifact.
+
+
 ### In research writing
 
 - **No adjective without a measurement behind it.** "Significantly faster" is rejected; "0.6 s
