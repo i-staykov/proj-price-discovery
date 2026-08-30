@@ -3,7 +3,7 @@ name = "pricediscovery"
 version = "0.0.0"
 description = "How fast does the market incorporate scheduled macro releases?"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = ["tzdata>=2024.1"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.6"]

@@ -16,6 +16,11 @@ test:
 
 check: lint test
 
+# Rebuilds the release calendar snapshot from ALFRED and the Fed meeting calendars.
+# Needs FRED_API_KEY in the environment.
+calendar:
+    uv run python -m pricediscovery.calendar
+
 # Regenerates every figure and every number quoted in the README from raw data.
 # Nothing may be typed into the README by hand.
 results:
