@@ -1593,6 +1593,9 @@ wheels = [
 name = "pricediscovery"
 version = "0.0.0"
 source = { editable = "." }
+dependencies = [
+    { name = "tzdata" },
+]
 
 [package.optional-dependencies]
 dev = [
@@ -1616,6 +1619,7 @@ requires-dist = [
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8" },
     { name = "requests", marker = "extra == 'notebook'", specifier = ">=2.32" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.6" },
+    { name = "tzdata", specifier = ">=2024.1" },
 ]
 provides-extras = ["dev", "notebook"]
 

@@ -150,4 +150,18 @@ outcome licenses adding an unplanned analysis to obtain a different one.
 
 ## Deviations
 
-None yet. Each entry states what changed, when, and why.
+Each entry states what changed, when, and why.
+
+### 2026-08-30 — primary sample is 212 events, not 214
+
+The verified release calendar (#17, `src/pricediscovery/release_calendar.csv`, sources in ADR 0003)
+holds 106 CPI and 106 Employment Situation releases over 2017-09-01 to 2026-07-31, not 107 each. The
+2025 federal shutdown removed two: no CPI was released in November 2025 (the September report was
+delayed to 2025-10-24) and the October 2025 Employment Situation was cancelled. Both are absent from
+the calendar, not imputed (ADR 0001).
+
+The count is a fixed input to one procedure here: the recovery check simulates 100 datasets of
+**212** events each, in place of 214. Every "$E = 214$" in `docs/framings/` and `docs/limitations.md`
+is now 212. The 214 in the Sample and Analysis sections above is left as written, per the rule
+against editing the plan body. FOMC, a robustness input only, is **71** realised scheduled
+statements against the 45 + 29 cadence estimate that was in `docs/framings/sample.md`.

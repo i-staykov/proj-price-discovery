@@ -78,3 +78,6 @@ runs.
 This decision does not select which specific releases go into the sample, or build the loader — that
 is ingestion work for a follow-up ticket. It only fixes the convention and the sources so that ticket
 does not have to re-derive them.
+
+The open question above — which ALFRED series identify the headline CPI and Employment Situation
+releases — is resolved in ADR 0003 (#17): the vintage dates of `CPIAUCNS` and `PAYNSA`.

@@ -69,7 +69,7 @@ $\mu$ and $\sigma$ are estimated, not supplied. $\mu$ carries the headline answe
 population half-time; $\sigma$ sets the degree of shrinkage and answers whether a single population
 speed exists.
 
-Partial pooling is required by the sample: at $E = 214$ (`sample.md`) no pooling gives per-event
+Partial pooling is required by the sample: at $E = 212$ (`sample.md`) no pooling gives per-event
 posteriors too diffuse to report, and complete pooling forecloses the release-type and year
 contrasts.
 
