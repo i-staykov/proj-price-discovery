@@ -27,7 +27,9 @@ It is estimated by the hierarchical model in `docs/framings/fraction-of-move.md`
 magnitude of the response from its speed so the ratio is never formed and small-move events are not
 excluded.
 
-$H = 1$ hour. The primary sample is CPI and the Employment Situation: 214 events, 2017-09 to 2026-07.
+$H = 1$ hour. The primary sample is CPI and the Employment Situation, 2017-09 to 2026-07: 212 events
+once the calendar was verified (#17, ADR 0003), against the 214 estimated from publication cadence
+here. The deviation is logged in `PREREGISTRATION.md`.
 
 ## Rejected
 
@@ -61,7 +63,7 @@ digested, short enough to limit unrelated news. Sensitivity to $H \in \{30\,\mat
 4\,\mathrm{h}\}$ is preregistered rather than performed after the fact, and matters most when the
 half-time is an appreciable fraction of $H$.
 
-Excluding FOMC costs 45 events and removes the one release type not timed at 08:30 ET, so any
+Excluding FOMC costs 71 events and removes the one release type not timed at 08:30 ET, so any
 finding is conditional on the morning. `docs/limitations.md` carries this.
 
 Adding a release type later requires checking that no second scheduled release falls inside $(0, H]$.

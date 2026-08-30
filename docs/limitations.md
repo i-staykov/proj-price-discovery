@@ -117,7 +117,7 @@ minimum viable study.
 
 ## The sample is small and the intervals will be wide
 
-*214 events. Your population spread will be poorly identified, and any subgroup contrast will have
+*212 events. Your population spread will be poorly identified, and any subgroup contrast will have
 intervals wide enough to contain no effect and a large one.*
 
 Accepted, and the reason for partial pooling rather than per-event fits. The pooled half-time should

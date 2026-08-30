@@ -87,11 +87,14 @@ _SERIES = {"CPI": "CPIAUCNS", "EmploymentSituation": "PAYNSA"}
 _FOMC_CURRENT = "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
 _FOMC_HISTORICAL = "https://www.federalreserve.gov/monetarypolicy/fomchistorical{year}.htm"
 
-# fomccalendars.htm currently starts at 2021; earlier years need the historical pages.
-_FOMC_CURRENT_FROM = 2021
-
 # The statement PDF/HTML link carries the statement date: monetary20230201a.htm.
 _STATEMENT_LINK = re.compile(r"monetary(\d{8})a\d?\.(?:htm|pdf)")
+
+# A regularly scheduled meeting spans two days, so its date label carries a range
+# ("27-28"). Single-day entries are notation votes, framework statements or
+# intermeeting actions; none follow the 14:00 ET convention (ADR 0001). A cancelled
+# meeting has a range but no statement link, so the link requirement drops it.
+_TWO_DAY = re.compile(r"\d{1,2}-\d{1,2}")
 
 
 def _get(url: str) -> str:
@@ -107,38 +110,38 @@ def _alfred_release_dates(series_id: str) -> list[date]:
     return [date.fromisoformat(d) for d in payload["vintage_dates"]]
 
 
-# A regularly scheduled meeting spans two consecutive days; the day cell reads "27-28".
-# Single-day entries on these pages are notation votes, framework statements or
-# intermeeting actions, none of which follow the 14:00 ET convention (ADR 0001).
-_TWO_DAY = re.compile(r"\d{1,2}-\d{1,2}")
-_NOT_A_MEETING = ("unscheduled", "cancelled", "notation vote")
-
-
-def _fomc_current() -> list[date]:
-    dates = []
-    for row in _get(_FOMC_CURRENT).split("fomc-meeting__date")[1:]:
-        label, _, body = row.partition("</div>")
-        if _scheduled(label) and _STATEMENT_LINK.search(body):
-            dates.append(_statement_date(body))
-    return dates
-
-
-def _fomc_historical(year: int) -> list[date]:
-    dates = []
-    for panel in re.split(r"<h5[^>]*>", _get(_FOMC_HISTORICAL.format(year=year)))[1:]:
-        heading, _, body = panel.partition("</h5>")
-        if "Meeting" in heading and _scheduled(heading) and _STATEMENT_LINK.search(body):
-            dates.append(_statement_date(body))
-    return dates
-
-
-def _scheduled(text: str) -> bool:
-    text = re.sub(r"<[^>]+>", "", text)
-    return bool(_TWO_DAY.search(text)) and not any(mark in text for mark in _NOT_A_MEETING)
-
-
 def _statement_date(html: str) -> date:
     return datetime.strptime(_STATEMENT_LINK.search(html).group(1), "%Y%m%d").date()
+
+
+def _fomc_from_current(html: str) -> list[date]:
+    dates = []
+    for row in html.split("fomc-meeting__date")[1:]:
+        label, _, body = row.partition("</div>")
+        if _TWO_DAY.search(label.rsplit(">", 1)[-1]) and _STATEMENT_LINK.search(body):
+            dates.append(_statement_date(body))
+    return dates
+
+
+def _fomc_from_historical(html: str) -> list[date]:
+    dates = []
+    for panel in re.split(r"<h5[^>]*>", html)[1:]:
+        heading, _, body = panel.partition("</h5>")
+        if "Meeting" in heading and _TWO_DAY.search(heading) and _STATEMENT_LINK.search(body):
+            dates.append(_statement_date(body))
+    return dates
+
+
+def _fomc_statements() -> list[tuple[date, str]]:
+    current = _get(_FOMC_CURRENT)
+    listed_years = [int(y) for y in re.findall(r"(20\d{2}) FOMC Meetings", current)]
+    if not listed_years:
+        raise RuntimeError(f"no 'YYYY FOMC Meetings' headings at {_FOMC_CURRENT}; page changed")
+    statements = [(day, _FOMC_CURRENT) for day in _fomc_from_current(current)]
+    for year in range(SAMPLE_START.year, min(listed_years)):
+        url = _FOMC_HISTORICAL.format(year=year)
+        statements += [(day, url) for day in _fomc_from_historical(_get(url))]
+    return statements
 
 
 def refresh(path: Path = _SNAPSHOT) -> None:
@@ -152,10 +155,11 @@ def refresh(path: Path = _SNAPSHOT) -> None:
             if SAMPLE_START <= day <= SAMPLE_END
         ]
 
-    fomc = [(day, _FOMC_CURRENT) for day in _fomc_current()]
-    for year in range(SAMPLE_START.year, _FOMC_CURRENT_FROM):
-        fomc += [(day, _FOMC_HISTORICAL.format(year=year)) for day in _fomc_historical(year)]
-    rows += [("FOMC", day, source) for day, source in fomc if SAMPLE_START <= day <= SAMPLE_END]
+    rows += [
+        ("FOMC", day, source)
+        for day, source in _fomc_statements()
+        if SAMPLE_START <= day <= SAMPLE_END
+    ]
 
     rows.sort(key=lambda r: (r[1], r[0]))
     with path.open("w", newline="") as f:
