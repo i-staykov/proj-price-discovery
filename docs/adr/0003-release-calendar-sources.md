@@ -2,7 +2,7 @@
 
 Status: accepted
 Date: 2026-08-30
-Issue: #17
+Issue: #24 (built in #17)
 
 ## Context
 
