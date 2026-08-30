@@ -4,15 +4,18 @@ Binance publishes one zip per symbol-day at a stable URL with a `.CHECKSUM` side
 holding the sha256 of the zip. `daily_klines` fetches a day once, checks it against
 that sidecar, and writes it under data/; a later call for the same day reads the
 cached file and never touches the network. A mismatch raises and nothing is
-written, so a corrupted download is never cached and never silently retried.
+written, and the verified bytes reach their final path through an atomic rename,
+so a cached entry is always either absent or the checked archive.
 
-1-second klines are the chosen product (ADR 0003, #7): second-level timing at a
-fraction of the size of the trade-level archives.
+1-second klines are the chosen product: the preregistered sample (PREREGISTRATION.md
+"Sample") and the notation (docs/framings/notation.md) both rest on #7's
+recommendation of second-level klines over the trade-level archives.
 """
 
 from __future__ import annotations
 
 import hashlib
+import os
 import urllib.request
 from datetime import date
 from pathlib import Path
@@ -50,5 +53,7 @@ def daily_klines(day: date, symbol: str = "BTCUSDT", cache_dir: Path = _CACHE) -
         raise ChecksumMismatch(f"{name}: expected {expected}, got {actual}")
 
     cached.parent.mkdir(parents=True, exist_ok=True)
-    cached.write_bytes(archive)
+    staging = cached.with_suffix(".zip.part")
+    staging.write_bytes(archive)
+    os.replace(staging, cached)
     return cached

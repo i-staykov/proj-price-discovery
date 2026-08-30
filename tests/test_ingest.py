@@ -36,7 +36,10 @@ def test_checksum_mismatch_raises_and_caches_nothing(tmp_path, responder):
 
 def test_verified_archive_is_written_to_the_cache(tmp_path, responder, archive):
     responder(hashlib.sha256(archive).hexdigest())
-    assert daily_klines(DAY, cache_dir=tmp_path).read_bytes() == archive
+    path = daily_klines(DAY, cache_dir=tmp_path)
+    assert path == tmp_path / "BTCUSDT" / "1s" / f"BTCUSDT-1s-{DAY.isoformat()}.zip"
+    assert path.read_bytes() == archive
+    assert list(tmp_path.rglob("*.part")) == []
 
 
 def test_cached_day_is_not_refetched(tmp_path, monkeypatch, archive):
