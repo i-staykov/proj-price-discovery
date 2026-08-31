@@ -1,5 +1,6 @@
 import zipfile
 from datetime import UTC, date, datetime
+from math import log
 
 import pytest
 
@@ -85,11 +86,33 @@ def test_raises_when_no_trade_precedes_release(tmp_path, release):
         event_window(release, path, window=(-5, 5))
 
 
+def test_horizon_grid_maps_to_expected_indices(tmp_path, release):
+    # ADR 0004: window[tau] is the kline covering [release+tau, release+tau+1s),
+    # so a horizon of k seconds -- the move over [release, release+k s) -- is
+    # read at index k-1, and the preregistered grid lands on {0, 9, 59, 599, 3599}.
+    release_ms = round(release.timestamp() * 1000)
+    prices = {release_ms + s * 1000: BASELINE + s for s in range(-1, 3600)}
+    path = tmp_path / "day.zip"
+    _write_klines_zip(path, prices)
+
+    result = event_window(release, path)  # default window covers (-300, 3600)
+    baseline = log(BASELINE - 1)  # P(0-) is the kline opening at tau = -1
+
+    grid_seconds_to_index = {1: 0, 10: 9, 60: 59, 600: 599, 3600: 3599}
+    for horizon_s, index in grid_seconds_to_index.items():
+        assert index == horizon_s - 1
+        assert result[index] == pytest.approx(log(BASELINE + index) - baseline)
+
+
 @pytest.mark.parametrize(
     "day",
     [date(2021, 3, 12), date(2021, 3, 15)],  # either side of the 2021 DST transition
 )
-def test_dst_boundary_release_aligns_to_tau_zero(tmp_path, day):
+def test_alignment_has_no_timezone_dependence(tmp_path, day):
+    # to_utc's DST correctness is test_calendar.py's job. This only shows align.py
+    # does integer arithmetic on the UTC instant and never consults the ET offset:
+    # the fixture is built from the same to_utc call, so a wrong offset would shift
+    # fixture and alignment together and the jump would still sit at tau = 0.
     release = to_utc(day, "CPI")
     path = _spiky_day(tmp_path, release, range(-5, 6))
     result = event_window(release, path, window=(-5, 5))

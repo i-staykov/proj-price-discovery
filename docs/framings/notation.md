@@ -24,4 +24,6 @@ The grid $\mathcal{T}$ is logarithmic because the kill-check (#6) found sub-minu
 linear grid would spend most of its points after the event of interest.
 
 Whether $P_e$ is a trade price, a mid or a kline close follows from #7's recommendation of 1-second
-klines. Event-time alignment at $\tau = 0$ is the pipeline's dominant error risk.
+klines. Event-time alignment at $\tau = 0$ is the pipeline's dominant error risk. The implementation
+discretises $\tau$ to the second by keying on the kline that opens at $t_e + \tau$; ADR 0004 fixes
+that convention and the resulting map from the grid $\mathcal{T}$ to array indices.

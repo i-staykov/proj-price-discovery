@@ -1,8 +1,10 @@
 """Event-time alignment: R(tau) for one release from one daily kline archive.
 
 `event_window` reads a `daily_klines` archive (#18) and returns the cumulative log
-return from the last traded price strictly before the release, indexed by whole
-seconds relative to the release instant (notation in docs/framings/notation.md).
+return from the last traded price strictly before the release, keyed by the kline's
+opening second relative to the release instant. That key is not elapsed seconds:
+the value at `tau` spans `tau + 1` seconds, and ADR 0004 fixes how the preregistered
+horizon grid (docs/framings/notation.md) maps onto it.
 Both inputs are UTC; the release calendar (#8) already carries the DST-correct
 offset, so alignment here is integer second arithmetic on two UTC instants, never
 a timezone lookup. A one-second or one-hour slip here would produce a clean null
@@ -39,10 +41,12 @@ def event_window(
     klines_zip: Path,
     window: tuple[int, int] = (-300, 3600),
 ) -> dict[int, float]:
-    """R(tau) = log P(tau) - log P(0-) for every traded second tau in `window`.
+    """log P - log P(0-) for the kline opening at `release_utc + tau`, per tau in `window`.
 
-    P(0-) is the close of the last traded second strictly before `release_utc`.
-    Raises ValueError if no trade precedes the release.
+    `tau` keys the kline that opens at `release_utc + tau`, so its value spans
+    `tau + 1` seconds and the horizon grid maps to indices {0, 9, 59, 599, 3599}
+    (ADR 0004). P(0-) is the close of the last kline opening strictly before
+    `release_utc`. Raises ValueError if no kline precedes the release.
     """
     release_ms = round(release_utc.timestamp() * 1000)
     seconds = _seconds(klines_zip)
