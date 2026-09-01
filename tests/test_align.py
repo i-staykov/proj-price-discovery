@@ -57,6 +57,23 @@ def test_jump_lands_at_tau_zero_not_adjacent(tmp_path, release):
     assert result[1] == pytest.approx(0.0)
 
 
+def test_microsecond_archive_after_2025_aligns_to_the_same_indices(tmp_path):
+    release = datetime(2025, 1, 2, 13, 30, tzinfo=UTC)
+    release_us = round(release.timestamp() * 1_000_000)
+    prices = {
+        release_us - 1_000_000: BASELINE,
+        release_us: SPIKE,
+        release_us + 1_000_000: BASELINE,
+    }
+    path = tmp_path / "day.zip"
+    _write_klines_zip(path, prices)
+
+    result = event_window(release, path, window=(-1, 1))
+    assert result[-1] == pytest.approx(0.0)
+    assert result[0] == pytest.approx(1.0)
+    assert result[1] == pytest.approx(0.0)
+
+
 def test_missing_second_is_absent_not_forward_filled(tmp_path, release):
     present = [s for s in range(-5, 6) if s != 2]
     release_ms = round(release.timestamp() * 1000)
