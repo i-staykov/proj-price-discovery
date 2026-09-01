@@ -45,10 +45,9 @@ supports it.
 choosing events using information from after the release, and your curve is a curve of the events
 that happened to move.*
 
-The objection the model is built around. The estimand is a ratio of expectations, so
-$R(\tau)/R(H)$ is never formed; magnitude and rate are fitted jointly, and a release that moved
-nothing contributes weak evidence about its rate rather than a divergent ratio. No event is dropped
-for being uninformative.
+The estimand is a ratio of expectations, so $R(\tau)/R(H)$ is never formed. Magnitude and rate are
+fitted jointly; a release that moved nothing contributes weak evidence about its rate rather than a
+divergent ratio. No event is dropped for being uninformative.
 
 Exclusion rules are fixed in `PREREGISTRATION.md` before any fit and concern data integrity only.
 
@@ -90,8 +89,8 @@ incorporation, not repaired by refitting until the residuals look tidy.
 of the spread. You have injected a common error into every horizon at once, and it is largest
 relative to the signal at exactly the horizon you care most about.*
 
-No answer, and the objection we would raise first. Bid-ask bounce at the baseline shifts the whole
-curve for that event, and at $\tau = 1$ s the accumulated move may be of the order of the spread.
+No answer. Bid-ask bounce at the baseline shifts the whole curve for that event, and at
+$\tau = 1$ s the accumulated move may be of the order of the spread.
 
 The per-event magnitude parameter absorbs part of it, since a constant offset resembles a slightly
 different $M_e$. It does not absorb the distortion at the shortest horizons, where the offset is not
@@ -120,8 +119,8 @@ minimum viable study.
 *212 events. Your population spread will be poorly identified, and any subgroup contrast will have
 intervals wide enough to contain no effect and a large one.*
 
-Accepted, and the reason for partial pooling rather than per-event fits. The pooled half-time should
-be reasonably determined; the year and release-type contrasts are the constrained comparisons.
+Accepted, and the reason for partial pooling rather than per-event fits. Precision is reported from
+the posterior rather than assumed from the event count.
 
 A wide interval reported as wide is not a failure. An interval narrowed by treating nested horizons
 as independent would be.
@@ -137,9 +136,20 @@ Correct. The exclusion is forced by contamination rather than chosen, since the 
 conference at 14:30 ET falls inside the window (ADR 0002), but the consequence stands: the primary
 result describes releases at 08:30 ET.
 
-The FOMC robustness check is informative about direction and confounded by construction.
+The FOMC robustness check is confounded by construction.
 
 **Reducible**, by a design that gives FOMC its own horizon and accepts non-comparability.
+
+## The event calendar does not contain every 08:30 release
+
+*CPI and the Employment Situation are not the only US releases at 08:30 ET. Your calendar contains
+only the events you study, so it cannot show that their windows are otherwise clean.*
+
+Correct. A coincident release would make the response attributable only to the joint information
+set, not to CPI or the Employment Situation alone. This is unresolved before estimation.
+
+**Reducible**, by screening the 212 dates against a fixed calendar of other scheduled releases and
+logging any sample change as a preregistration deviation.
 
 ## Overlapping horizons
 

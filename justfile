@@ -26,4 +26,4 @@ calendar:
 # Regenerates every figure and every number quoted in the README from raw data.
 # Nothing may be typed into the README by hand.
 results:
-    @echo "No results yet. The estimand is undecided; see the Scoping milestone." && exit 1
+    @echo "No results yet. The analysis is preregistered; estimation has not started." && exit 1

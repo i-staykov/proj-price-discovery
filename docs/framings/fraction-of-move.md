@@ -21,7 +21,9 @@ defines and makes no claim that the destination is the efficient price.
 
 No second scheduled release may fall inside $(0, H]$. FOMC statements fail this, since the chair's
 press conference begins at 14:30 ET and has followed every meeting since 2019. The primary sample is
-CPI and the Employment Situation, both at 08:30 ET. ADR 0002 records the decision.
+CPI and the Employment Situation, both at 08:30 ET. The release calendar contains only the three
+study events, so it does not establish isolation from releases published by other agencies.
+`docs/limitations.md` carries that unresolved screen. ADR 0002 records the sample decision.
 
 ## Model
 

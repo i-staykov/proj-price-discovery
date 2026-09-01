@@ -4,7 +4,8 @@ data/
 *.parquet
 .venv/
 
-# LaTeX build artifacts. docs/model/model.tex and model.pdf are committed.
+# LaTeX source is committed; the built copy lives at the repository root.
+docs/model/model.pdf
 docs/model/*.aux
 docs/model/*.log
 docs/model/*.out

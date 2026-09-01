@@ -1,14 +1,7 @@
-"""Scheduled US macro releases as UTC timestamps.
+"""Load the committed release calendar as DST-correct UTC timestamps.
 
-CPI and the Employment Situation form the primary sample; FOMC statements are loaded
-for the robustness comparison only (ADR 0002). Release dates come from ALFRED vintage
-dates and the Federal Reserve's meeting calendars (ADR 0001). `refresh` does the
-fetching and rewrites `release_calendar.csv`; everything downstream reads that snapshot
-through `load`, so the only network access is a deliberate refresh.
-
-The snapshot stores the published local date; `load` attaches the scheduled Eastern
-wall-clock time and converts to UTC through the IANA database, so the offset is the one
-in effect on the release date rather than the one in effect when the code runs.
+`refresh` rebuilds the snapshot from ALFRED and Federal Reserve sources; ordinary use is
+offline. FOMC is loaded for the robustness sample only (ADRs 0001--0003).
 """
 
 from __future__ import annotations

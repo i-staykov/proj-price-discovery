@@ -15,7 +15,7 @@
 | $\lambda_e$ | incorporation rate, $\mathrm{s}^{-1}$ |
 | $\tau^{1/2}_e$ | half-time: the $\tau$ at which $\phi_e(\tau) = 1/2$, seconds |
 | $\mu, \sigma$ | population mean and standard deviation of $\log \lambda_e$ |
-| $\varsigma$ | background volatility scale |
+| $\varsigma_e$ | event-specific background volatility scale |
 
 Returns are logarithmic, quoted in basis points. Times are UTC internally; ET appears only in prose
 about release schedules. Intervals are 95% credible intervals.
