@@ -61,7 +61,7 @@
 {\fontsize{34}{40}\selectfont\bfseries How fast does the market\\[0.2em] price in the news?}\\[1.6em]
 {\large\color{muted} A measurement study. Not a strategy.}\\[2.2em]
 {\color{accent}\rule{6em}{2.5pt}}\\[1.6em]
-{\small\color{muted}\texttt{proj-price-discovery}\quad$\cdot$\quad the model in 14 slides}
+{\small\color{muted}\texttt{proj-price-discovery}\quad$\cdot$\quad the model}
 \end{center}
 \end{frame}}
 
@@ -241,12 +241,12 @@ $$m_e(\tau)=M_e\,\frac{1-e^{-\lambda_e\tau}}{1-e^{-\lambda_e H}}
 \end{frame}
 
 % ---------------------------------------------------------------- 8
-\begin{frame}{214 events. Now what?}
+\begin{frame}{212 events. Now what?}
 \vspace{0.6em}
 \begin{center}
 \begin{tikzpicture}[font=\small]
 \node[draw,rounded corners,fill=wash,inner sep=9pt,text width=3.3cm,align=center] (n)
-  {\textbf{No pooling}\\[0.4em]fit each event alone\\[0.5em]\bad{214 shrugs}\\{\color{muted}\scriptsize every interval useless}};
+  {\textbf{No pooling}\\[0.4em]fit each event alone\\[0.5em]\bad{212 shrugs}\\{\color{muted}\scriptsize every interval useless}};
 \node[draw,rounded corners,fill=wash,inner sep=9pt,text width=3.3cm,align=center,right=0.7cm of n] (c)
   {\textbf{Complete pooling}\\[0.4em]one $\lambda$ for all\\[0.5em]\bad{one number}\\{\color{muted}\scriptsize CPI vs FOMC? 2017 vs 2026?}};
 \node[draw=good,line width=1.4pt,rounded corners,fill=good!8,inner sep=9pt,text width=3.3cm,align=center,right=0.7cm of c] (p)
@@ -338,7 +338,7 @@ $$\log\lambda_e\ \sim\ \mathcal{N}(\mu,\ \sigma^2)$$
 \begin{scope}[on background layer]
 \node[draw=muted,dashed,rounded corners,fit=(lam)(amp)(fl)(R),inner sep=8pt] (pl) {};
 \end{scope}
-\node[anchor=south east,font=\scriptsize,color=muted] at (pl.south east) {\ 214 events};
+\node[anchor=south east,font=\scriptsize,color=muted] at (pl.south east) {\ 212 events};
 
 \node[anchor=west,font=\scriptsize,color=muted] at (8.6,2.3) {shared family};
 \node[anchor=west,font=\scriptsize,color=muted] at (8.6,1.35) {the observed prices};
@@ -407,7 +407,7 @@ percentile. Every reported number is a summary of this table.}
 \node[draw,rounded corners,fill=wash,inner sep=6pt,text width=2.5cm,align=center] (a)
   {pick a true\\half-time, say \lead{8 s}};
 \node[draw,rounded corners,fill=wash,inner sep=6pt,text width=2.5cm,align=center,right=of a] (b)
-  {simulate 214\\fake events};
+  {simulate 212\\fake events};
 \node[draw,rounded corners,fill=wash,inner sep=6pt,text width=2.5cm,align=center,right=of b] (c)
   {fit as if it\\were real};
 \node[draw=accent,line width=1.1pt,rounded corners,fill=accent!8,inner sep=6pt,text width=2.7cm,align=center,right=of c] (d)
@@ -544,15 +544,14 @@ The commit timestamp is what makes the rest of this checkable.}
 \node[draw=good,line width=1.2pt,rounded corners,fill=good!8,inner sep=9pt,text width=3.3cm,align=center] (a)
   {\ok{done}\\[0.3em]does it react?\\{\scriptsize\color{muted}9/9 yes}};
 \node[draw=good,line width=1.2pt,rounded corners,fill=good!8,inner sep=9pt,text width=3.3cm,align=center,right=of a] (b)
-  {\ok{done}\\[0.3em]what do we measure?\\{\scriptsize\color{muted}ADR 0002}};
+  {\ok{done}\\[0.3em]fix the analysis\\{\scriptsize\color{muted}preregistered}};
 \node[draw=amber,line width=1.2pt,rounded corners,fill=amber!8,inner sep=9pt,text width=3.3cm,align=center,right=of b] (c)
-  {\color{amber}\bfseries next\\[0.3em]preregister it\\{\scriptsize\color{muted}then, and only then, code}};
+  {\color{amber}\bfseries next\\[0.3em]validate the model\\{\scriptsize\color{muted}synthetic data first}};
 \draw[-{Latex[length=2mm]},muted] (a)--(b);
 \draw[-{Latex[length=2mm]},muted] (b)--(c);
 \end{tikzpicture}
 \\[2.2em]
-{\color{muted}The public commit timestamp proving the plan predates the results\\
-is the most valuable thing in this repository.}
+{\color{muted}Only after recovery and coverage pass do the release-day prices enter the model.}
 \end{center}
 \end{frame}}
 

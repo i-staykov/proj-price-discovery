@@ -26,9 +26,8 @@ CPI was released in November 2025 and the October 2025 Employment Situation was 
 the federal shutdown (ADR 0001). FOMC 2020 is 7, not 8: the 17-18 March meeting was cancelled and
 its replacement, the 15 March intermeeting cut, is out of scope (ADR 0001).
 
-Price coverage is complete at one row per second from 2017-09-01 onward; 2017-08-17, the listing
-day, has 71,972 of 86,400 seconds. Binance emits no kline for a second without a trade, so row count
-is a liquidity floor rather than a file-integrity check.
+Six sampled days between 2017-09-01 and 2022-06-10 each have 86,400 rows; the 2017-08-17 listing day
+has 71,972. This checks the sample dates, not every day in the archive.
 
 ## Primary sample
 
@@ -39,7 +38,5 @@ FOMC is excluded from the primary sample and retained as a robustness check: the
 conference at 14:30 ET falls inside the window, so $m_e(H)$ would measure the statement and the
 press conference jointly. ADR 0002 carries the argument.
 
-At $E = 212$ the population spread $\sigma$ in `fraction-of-move.md` is identified but not
-precisely: the year and release-type contrasts are the constrained comparisons, not the pooled
-half-time. Dropping events after inspecting them is excluded; exclusion rules are fixed in
-`PREREGISTRATION.md`.
+The 212 events motivate partial pooling. Precision is assessed by simulation and posterior
+diagnostics. Exclusion rules are fixed in `PREREGISTRATION.md`.

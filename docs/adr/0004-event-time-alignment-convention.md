@@ -47,8 +47,5 @@ Downstream code reads horizons through this mapping, not by treating the key as 
 
 ## Consequences
 
-The grid-to-index mapping is now a load-bearing constant shared by `align.py` and the estimation
-code. `tests/test_align.py` pins it against `notation.md` so a future change to either side breaks
-a test rather than silently shifting every reported horizon. If `notation.md` is restated so that
-`P(tau)` means the price over `[release + tau, release + tau + 1s)`, this ADR is redundant and the
-test becomes a tautology; revisit it then.
+The grid-to-index mapping is load-bearing. `tests/test_align.py` pins the implementation; `notation.md`
+points here so prose and code share one definition.

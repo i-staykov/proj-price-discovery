@@ -2,18 +2,17 @@
 
 **How fast does the market incorporate new public information?**
 
-Scheduled US macro releases (CPI and the Employment Situation at 08:30 ET, FOMC statements at
-14:00 ET) arrive at a known second and are not caused by the market. That makes them a clean
-instrument for measuring the speed of price discovery rather than its direction. Prices come from
-`data.binance.vision`, which is free and requires no API key, and crypto trades continuously, so a
+The primary events are CPI and Employment Situation releases at 08:30 ET. FOMC statements at
+14:00 ET are a robustness sample because the chair's 14:30 press conference contaminates the
+one-hour window. BTCUSDT prices come from `data.binance.vision`; crypto trades continuously, so a
 release lands in an open market with no session boundary to model.
 
 This is a measurement study, not a trading strategy.
 
 ## Status
 
-🚧 **Scoping.** No estimation code will be written before `PREREGISTRATION.md` is merged, so that the plan
-provably predates the results.
+**Pipeline complete.** The premise passed its kill-check, the analysis is preregistered, and the
+calendar, ingestion and alignment layers are tested. Estimation has not started.
 
 ## Running it
 
@@ -26,8 +25,7 @@ just check   # ruff and pytest
 ```
 
 Dependencies live in `pyproject.toml` and are pinned in `uv.lock`. `just setup` installs the `dev`
-extra; the `notebook` extra adds pandas, matplotlib, requests and a kernel for `notebooks/`, via
-`uv sync --extra notebook`.
+extra. For notebooks: `uv sync --extra notebook`.
 
 `model.pdf` needs a LaTeX distribution with beamer, TikZ and pgfplots, which TeX Live and MacTeX
 both provide. It is committed, so this is only needed to change it:
@@ -44,8 +42,7 @@ currently exits non-zero, because there are no results to regenerate.
 - `CLAUDE.md` — the standing rules: what the project is, what may not be done, and the writing
   standard reviews enforce.
 - `CONTRIBUTING.md` — the ticket-to-merge workflow.
-- `model.pdf` — the model in fifteen slides, for a reader meeting it for the first time. Source in
-  `docs/model/`.
+- `model.pdf` — the model deck. Source in `docs/model/`.
 - `docs/framings/` — the estimand and the model.
 - `docs/adr/` — one short record per decision that is expensive to reverse.
 - `docs/limitations.md` — the objections.

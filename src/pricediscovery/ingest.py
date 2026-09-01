@@ -1,15 +1,7 @@
-"""Daily kline archives from data.binance.vision, cached under data/.
+"""Cache checksum-verified daily klines from data.binance.vision.
 
-Binance publishes one zip per symbol-day at a stable URL with a `.CHECKSUM` sidecar
-holding the sha256 of the zip. `daily_klines` fetches a day once, checks it against
-that sidecar, and writes it under data/; a later call for the same day reads the
-cached file and never touches the network. A mismatch raises and nothing is
-written, and the verified bytes reach their final path through an atomic rename,
-so a cached entry is always either absent or the checked archive.
-
-1-second klines are the chosen product: the preregistered sample (PREREGISTRATION.md
-"Sample") and the notation (docs/framings/notation.md) both rest on #7's
-recommendation of second-level klines over the trade-level archives.
+Verified bytes reach the final path through an atomic rename, so an interrupted write
+cannot become a trusted cache entry. The preregistered sample uses 1-second klines.
 """
 
 from __future__ import annotations

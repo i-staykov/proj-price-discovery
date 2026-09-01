@@ -6,8 +6,8 @@ is repeated here because it is what gets violated most often by generated code.
 This is a measurement study of how fast prices incorporate scheduled macro releases. It is not a
 trading strategy. Do not propose backtests, Sharpe ratios or signals.
 
-The estimand is undecided and no estimation code may be written before `PREREGISTRATION.md` is
-merged. If asked for estimation code before then, say so instead of writing it.
+The estimand is fixed in ADR 0002 and the analysis is preregistered. Estimation must follow
+`PREREGISTRATION.md`; changes are logged as deviations rather than edited into the plan.
 
 ## Code
 
@@ -25,6 +25,7 @@ merged. If asked for estimation code before then, say so instead of writing it.
 - No sentence that restates its heading. No summary that adds nothing.
 - Full sentences where there is reasoning; bullets only for genuine lists.
 - No emoji in code, commit messages or ADRs.
+- No AI attribution trailers or generated-by footers.
 - No adjective without a measurement behind it. State uncertainty as an interval.
 - Axes get labels and units.
 
@@ -38,9 +39,8 @@ Derivations are exempt. Length is a fault only when it is padding.
 
 ## Register
 
-Everything committed is production. No teaching, no toy examples, no analogies, no "recall that".
-Justify a choice; do not explain the concept behind it. Learning material lives outside the
-repository.
+Everything committed is production. No teaching, toy examples, analogies or "recall that". Justify
+a choice; do not explain the concept behind it. `model.pdf` is a concise reviewer-facing exception.
 
 ## Commits
 
