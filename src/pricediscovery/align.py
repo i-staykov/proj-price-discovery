@@ -1,18 +1,8 @@
-"""Event-time alignment: R(tau) for one release from one daily kline archive.
+"""Align one daily kline archive to a release instant.
 
-`event_window` reads a `daily_klines` archive (#18) and returns the cumulative log
-return from the last traded price strictly before the release, keyed by the kline's
-opening second relative to the release instant. That key is not elapsed seconds:
-the value at `tau` spans `tau + 1` seconds, and ADR 0004 fixes how the preregistered
-horizon grid (docs/framings/notation.md) maps onto it.
-Both inputs are UTC; the release calendar (#8) already carries the DST-correct
-offset, so alignment here is integer second arithmetic on two UTC instants, never
-a timezone lookup. A one-second or one-hour slip here would produce a clean null
-rather than an error, so this is the pipeline's dominant error risk (#19).
-
-Seconds with no trade have no row in the archive and are absent from the result,
-never forward-filled: `tau in window` is how a caller distinguishes a flat second
-from a missing one.
+Binance Spot timestamps switch from milliseconds to microseconds on 2025-01-01.
+`tau` keys the kline opening second, not elapsed time; ADR 0004 maps horizons to
+indices. Missing seconds remain absent.
 """
 
 from __future__ import annotations
@@ -26,13 +16,19 @@ from pathlib import Path
 
 _OPEN_TIME = 0
 _CLOSE = 4
+_MICROSECONDS = 1_000_000_000_000_000
+
+
+def _milliseconds(timestamp: int) -> int:
+    return timestamp // 1000 if timestamp >= _MICROSECONDS else timestamp
 
 
 def _seconds(klines_zip: Path) -> list[tuple[int, float]]:
     with zipfile.ZipFile(klines_zip) as zf:
         raw = zf.read(zf.namelist()[0]).decode()
     return sorted(
-        (int(row[_OPEN_TIME]), float(row[_CLOSE])) for row in csv.reader(io.StringIO(raw))
+        (_milliseconds(int(row[_OPEN_TIME])), float(row[_CLOSE]))
+        for row in csv.reader(io.StringIO(raw))
     )
 
 
@@ -41,13 +37,7 @@ def event_window(
     klines_zip: Path,
     window: tuple[int, int] = (-300, 3600),
 ) -> dict[int, float]:
-    """log P - log P(0-) for the kline opening at `release_utc + tau`, per tau in `window`.
-
-    `tau` keys the kline that opens at `release_utc + tau`, so its value spans
-    `tau + 1` seconds and the horizon grid maps to indices {0, 9, 59, 599, 3599}
-    (ADR 0004). P(0-) is the close of the last kline opening strictly before
-    `release_utc`. Raises ValueError if no kline precedes the release.
-    """
+    """Return cumulative log returns keyed by kline opening second; see ADR 0004."""
     release_ms = round(release_utc.timestamp() * 1000)
     seconds = _seconds(klines_zip)
 
