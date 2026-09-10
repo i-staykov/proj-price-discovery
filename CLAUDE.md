@@ -81,7 +81,7 @@ is a fault only when it is padding.
 **Everything committed here is production.** Write for a competent reviewer.
 
 No teaching in the repository: no toy examples, analogies or "recall that". State the model, the
-assumption and what breaks it. Author notes stay outside the repository. `model.pdf` is a concise
+assumption and what breaks it. Author notes stay outside the repository. `model-explained.pdf` is a concise
 reviewer-facing exception and must agree with the model documents.
 
 ### In research writing

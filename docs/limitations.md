@@ -1,25 +1,13 @@
 # Limitations
 
-Objections in a reviewer's phrasing, with an answer or an admission that there is none. Written
-before the results, so the list is part of the design rather than a defence of the outcome.
-
-Each is marked **structural** if no ticket in this project can reduce it, or **reducible** if one
-could.
+**Structural** limits remain within this design; **reducible** limits could be bounded by a check,
+not all of which are planned here.
 
 ## Bitcoin is not the asset that CPI is about
 
-*A US inflation print is information about US inflation. You are measuring the price of a bearer
-asset traded mostly outside the US, held largely by people with no exposure to the CPI basket. Why
-should its incorporation speed tell anyone anything about how markets absorb macro news?*
-
-No answer that rescues external validity. The result is about how fast one continuously traded venue
-repriced on a scheduled macro release, and generalising it to Treasuries or equity index futures is
-unsupported.
-
-The design gains what it loses. Crypto trades continuously, so an 08:30 ET release lands in an open
-market with no auction, no session boundary and no queue of overnight orders. In the assets the
-release is nominally about, the same event is confounded by market structure this study would then
-have to model. That is a trade, not a free choice.
+The result concerns BTCUSDT on Binance, not Treasuries, equity futures or markets generally.
+Continuous trading removes a session boundary at release time; it does not establish external
+validity.
 
 **Structural.**
 
@@ -29,10 +17,8 @@ have to model. That is a trade, not a free choice.
 everything else that happened. On a quiet morning it is mostly the release; on a busy one your
 denominator is noise, and you have no way to tell the two apart.*
 
-Correct, and the price of having no consensus forecast to measure the surprise against. The model
-mitigates rather than solves: the size of the move is a per-event parameter, so an event whose window
-was dominated by unrelated news produces a diffuse posterior on its rate rather than a confident
-wrong answer.
+The per-event magnitude does not solve attribution. Unrelated news can resemble the assumed
+response and produce a concentrated but misleading rate posterior.
 
 $m_e(H)$ cannot be decomposed into release and non-release components. Nothing in the free data
 supports it.
@@ -59,8 +45,8 @@ preregistration predates the first estimation commit.
 *Nothing makes an hour the right terminal horizon. It sits in the denominator of your estimand, so
 every number you report is conditional on it, and you picked it before seeing any data.*
 
-Conceded. One hour is long enough for a macro release to be digested and short enough to limit
-unrelated news, and no sharper argument is available.
+One hour fixes the measurement's destination; it is not evidence that information has been fully
+incorporated by then.
 
 Sensitivity to $H \in \{30\,\mathrm{min}, 4\,\mathrm{h}\}$ is preregistered and reported whichever
 way it falls. The check is not a formality: $H$ enters $\phi$ through $1 - e^{-\lambda H}$, so it
@@ -77,9 +63,9 @@ exponential describes neither and you will report a compromise number as though 
 Conceded. $\phi_e$ is monotone in $\tau$ by construction, so the model cannot represent reversion at
 all, and two panels of the #6 grid already look like overshoot.
 
-Diagnosed from residual structure across horizons: systematic positive residuals at short $\tau$ and
-negative at medium $\tau$. If the diagnostic fires it is reported as a finding about the shape of
-incorporation, not repaired by refitting until the residuals look tidy.
+Residual scaling, direction alignment and the numerical overshoot rule remain to be fixed in
+ADR 0006 (#43). An unaligned average can cancel responses of opposite signs. A failed shape
+diagnostic is reported as a shape finding, not repaired by selecting another fit.
 
 **Reducible**, by fitting an overshoot-capable alternative and comparing.
 
@@ -96,8 +82,8 @@ The per-event magnitude parameter absorbs part of it, since a constant offset re
 different $M_e$. It does not absorb the distortion at the shortest horizons, where the offset is not
 small relative to $m_e(\tau)$.
 
-**Reducible**, by measuring the baseline as a mid price or a short pre-release average, at the cost
-of an averaging window that then needs preregistering.
+**Reducible.** The preceding 10-second mean is already preregistered (#59). Midquotes are not
+available from the chosen kline data.
 
 ## One venue, one symbol
 
@@ -114,13 +100,11 @@ minimum viable study.
 
 **Structural** on the clock; **reducible** on the venue.
 
-## The sample is small and the intervals will be wide
+## Event count does not establish precision
 
-*212 events. Your population spread will be poorly identified, and any subgroup contrast will have
-intervals wide enough to contain no effect and a large one.*
-
-Accepted, and the reason for partial pooling rather than per-event fits. Precision is reported from
-the posterior rather than assumed from the event count.
+There are 212 primary calendar events before exclusions. The information about a rate depends on
+the move, background volatility and observation grid, not the count alone. Precision must be
+measured rather than asserted in advance.
 
 A wide interval reported as wide is not a failure. An interval narrowed by treating nested horizons
 as independent would be.
@@ -161,4 +145,5 @@ $\Sigma_{e,jk} = \varsigma_e^2 \min(\tau_j, \tau_k)$, not a product of independe
 failure mode where the error presents as a better result, so it is the first thing to check in the
 estimation code.
 
-**Answered**, and worth verifying rather than believing.
+**Specified, not yet verified in model code.** Issue #47 requires equality with the dense
+multivariate-normal likelihood; this becomes answered when that test exists.

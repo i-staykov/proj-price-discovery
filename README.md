@@ -11,8 +11,9 @@ This is a measurement study, not a trading strategy.
 
 ## Status
 
-**Pipeline complete.** The premise passed its kill-check, the analysis is preregistered, and the
-calendar, ingestion and alignment layers are tested. Estimation has not started.
+The analysis is preregistered; calendar, ingestion and alignment code are tested.
+Prior specification, concurrent-release screening and validation gates remain open. No primary fit
+has run.
 
 ## Running it
 
@@ -27,11 +28,11 @@ just check   # ruff and pytest
 Dependencies live in `pyproject.toml` and are pinned in `uv.lock`. `just setup` installs the `dev`
 extra. For notebooks: `uv sync --extra notebook`.
 
-`model.pdf` needs a LaTeX distribution with beamer, TikZ and pgfplots, which TeX Live and MacTeX
-both provide. It is committed, so this is only needed to change it:
+[The model presentation](model-explained.pdf) is committed. Rebuilding it requires a LaTeX distribution
+with beamer, TikZ and pgfplots (TeX Live or MacTeX):
 
 ```sh
-cd docs/model && pdflatex model.tex && cp model.pdf ../../model.pdf
+just model
 ```
 
 `just results` will regenerate every figure and every number quoted in this README from raw data. It
@@ -39,11 +40,10 @@ currently exits non-zero, because there are no results to regenerate.
 
 ## How the repository is organised
 
-- `CLAUDE.md` — the standing rules: what the project is, what may not be done, and the writing
-  standard reviews enforce.
-- `CONTRIBUTING.md` — the ticket-to-merge workflow.
-- `model.pdf` — the model deck. Source in `docs/model/`.
-- `docs/framings/` — the estimand and the model.
-- `docs/adr/` — one short record per decision that is expensive to reverse.
-- `docs/limitations.md` — the objections.
-- `src/pricediscovery/` — library code. `tests/` — tests, in particular for event-time alignment.
+- `CLAUDE.md`: standing rules and writing standard.
+- `CONTRIBUTING.md`: issue and review workflow.
+- `docs/model/model-explained.tex`: source for the single model presentation.
+- `docs/framings/`: estimand and model.
+- `docs/adr/`: decisions and rejected alternatives.
+- `docs/limitations.md`: assumptions, objections and planned checks.
+- `src/pricediscovery/` and `tests/`: library code and tests.
