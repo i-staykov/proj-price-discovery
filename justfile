@@ -2,7 +2,7 @@ default:
     @just --list
 
 setup:
-    uv sync --extra dev
+    uv sync --extra dev --extra infer
 
 lint:
     uv run ruff check .
