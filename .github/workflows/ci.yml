@@ -14,5 +14,5 @@ jobs:
         with:
           enable-cache: true
       - uses: extractions/setup-just@v3
-      - run: uv sync --extra dev
+      - run: uv sync --extra dev --extra infer
       - run: just check

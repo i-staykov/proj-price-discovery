@@ -20,12 +20,12 @@ Requires [uv](https://docs.astral.sh/uv/) and [just](https://github.com/casey/ju
 `brew install uv just`. Python is pinned to 3.12 or newer by `pyproject.toml` and installed by uv.
 
 ```sh
-just setup   # uv sync, creates .venv from pyproject.toml and uv.lock
+just setup   # uv sync --extra dev --extra infer
 just check   # ruff and pytest
 ```
 
 Dependencies live in `pyproject.toml` and are pinned in `uv.lock`. `just setup` installs the `dev`
-extra. For notebooks: `uv sync --extra notebook`.
+and `infer` extras. For notebooks: `uv sync --extra dev --extra infer --extra notebook`.
 
 `model.pdf` needs a LaTeX distribution with beamer, TikZ and pgfplots, which TeX Live and MacTeX
 both provide. It is committed, so this is only needed to change it:
