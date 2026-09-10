@@ -1,6 +1,8 @@
 from collections import Counter
 from datetime import UTC, date, datetime, timedelta
 
+import pytest
+
 from pricediscovery.calendar import (
     PRIMARY_SAMPLE,
     SAMPLE_END,
@@ -16,20 +18,17 @@ def test_no_naive_timestamp_survives_the_loader():
         assert release.timestamp_utc.utcoffset() == timedelta(0)
 
 
-def test_est_release_converts_at_utc_minus_5():
-    # CPI, 08:30 ET, mid-January: America/New_York is UTC-5.
-    assert to_utc(date(2019, 1, 11), "CPI") == datetime(2019, 1, 11, 13, 30, tzinfo=UTC)
-
-
-def test_edt_release_converts_at_utc_minus_4():
-    # CPI, 08:30 ET, mid-June: America/New_York is UTC-4.
-    assert to_utc(date(2019, 6, 12), "CPI") == datetime(2019, 6, 12, 12, 30, tzinfo=UTC)
-
-
-def test_conversion_uses_the_offset_in_effect_on_the_release_date():
-    # DST began 2021-03-14. The offset must switch across that date, not track "now".
-    assert to_utc(date(2021, 3, 12), "CPI").hour == 13  # still EST
-    assert to_utc(date(2021, 3, 15), "CPI").hour == 12  # EDT
+@pytest.mark.parametrize(
+    ("day", "expected"),
+    [
+        (date(2019, 1, 11), datetime(2019, 1, 11, 13, 30, tzinfo=UTC)),
+        (date(2019, 6, 12), datetime(2019, 6, 12, 12, 30, tzinfo=UTC)),
+        (date(2021, 3, 12), datetime(2021, 3, 12, 13, 30, tzinfo=UTC)),
+        (date(2021, 3, 15), datetime(2021, 3, 15, 12, 30, tzinfo=UTC)),
+    ],
+)
+def test_conversion_uses_the_offset_in_effect_on_the_release_date(day, expected):
+    assert to_utc(day, "CPI") == expected
 
 
 def test_fomc_uses_the_1400_eastern_convention():
