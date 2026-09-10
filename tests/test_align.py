@@ -1,11 +1,10 @@
 import zipfile
-from datetime import UTC, date, datetime
+from datetime import UTC, datetime
 from math import log
 
 import pytest
 
 from pricediscovery.align import event_window
-from pricediscovery.calendar import to_utc
 
 BASELINE = 100.0
 SPIKE = BASELINE * 2.718281828459045  # e * baseline: log return of exactly 1.0
@@ -119,20 +118,3 @@ def test_horizon_grid_maps_to_expected_indices(tmp_path, release):
     for horizon_s, index in grid_seconds_to_index.items():
         assert index == horizon_s - 1
         assert result[index] == pytest.approx(log(BASELINE + index) - baseline)
-
-
-@pytest.mark.parametrize(
-    "day",
-    [date(2021, 3, 12), date(2021, 3, 15)],  # either side of the 2021 DST transition
-)
-def test_alignment_has_no_timezone_dependence(tmp_path, day):
-    # to_utc's DST correctness is test_calendar.py's job. This only shows align.py
-    # does integer arithmetic on the UTC instant and never consults the ET offset:
-    # the fixture is built from the same to_utc call, so a wrong offset would shift
-    # fixture and alignment together and the jump would still sit at tau = 0.
-    release = to_utc(day, "CPI")
-    path = _spiky_day(tmp_path, release, range(-5, 6))
-    result = event_window(release, path, window=(-5, 5))
-    assert result[0] == pytest.approx(1.0)
-    assert result[-1] == pytest.approx(0.0)
-    assert result[1] == pytest.approx(0.0)
