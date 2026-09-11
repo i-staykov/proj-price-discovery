@@ -1,0 +1,82 @@
+{
+  "seed": 4201,
+  "datasets": 2000,
+  "events_per_dataset": 212,
+  "terminal_horizon_s": 3600,
+  "return_unit": "bp log return",
+  "uncertainty": "Monte Carlo standard errors across independent datasets, not events",
+  "candidates": {
+    "a": {
+      "magnitude_prior": "preregistered",
+      "volatility_prior": "preregistered",
+      "p95_abs_return_bp": 2045.290014121431,
+      "p99_abs_return_bp": 11033.041745835737,
+      "exceedance_500_bp": 0.1513679245283019,
+      "exceedance_500_bp_se": 0.005149318558742913,
+      "exceedance_500_bp_mc95": [
+        0.14127526015316577,
+        0.161460588903438
+      ],
+      "exceedance_1000_bp": 0.08931603773584906,
+      "exceedance_1000_bp_se": 0.004036500018249812,
+      "exceedance_1000_bp_mc95": [
+        0.08140449770007943,
+        0.0972275777716187
+      ]
+    },
+    "b": {
+      "magnitude_prior": "StudentT(4, 0, 200)",
+      "volatility_prior": "proposal_31",
+      "p95_abs_return_bp": 695.1419755484249,
+      "p99_abs_return_bp": 1315.6036566536486,
+      "exceedance_500_bp": 0.10869811320754719,
+      "exceedance_500_bp_se": 0.0014456604281366749,
+      "exceedance_500_bp_mc95": [
+        0.10586461876839931,
+        0.11153160764669506
+      ],
+      "exceedance_1000_bp": 0.019669811320754717,
+      "exceedance_1000_bp_se": 0.0006911509766562987,
+      "exceedance_1000_bp_mc95": [
+        0.01831515540650837,
+        0.021024467235001062
+      ]
+    },
+    "c": {
+      "magnitude_prior": "preregistered",
+      "volatility_prior": "proposal_31",
+      "p95_abs_return_bp": 540.3061374892133,
+      "p99_abs_return_bp": 1661.0992163754938,
+      "exceedance_500_bp": 0.055889150943396235,
+      "exceedance_500_bp_se": 0.0019631080160794523,
+      "exceedance_500_bp_mc95": [
+        0.052041459231880506,
+        0.05973684265491196
+      ],
+      "exceedance_1000_bp": 0.02044575471698113,
+      "exceedance_1000_bp_se": 0.0009812958419320914,
+      "exceedance_1000_bp_mc95": [
+        0.01852241486679423,
+        0.02236909456716803
+      ]
+    },
+    "d": {
+      "magnitude_prior": "StudentT(4, 0, 200)",
+      "volatility_prior": "preregistered",
+      "p95_abs_return_bp": 1886.7507557243084,
+      "p99_abs_return_bp": 10408.047385657426,
+      "exceedance_500_bp": 0.19637971698113207,
+      "exceedance_500_bp_se": 0.004734899992968936,
+      "exceedance_500_bp_mc95": [
+        0.18709931299491295,
+        0.2056601209673512
+      ],
+      "exceedance_1000_bp": 0.08997641509433962,
+      "exceedance_1000_bp_se": 0.003997786471660211,
+      "exceedance_1000_bp_mc95": [
+        0.08214075360988561,
+        0.09781207657879364
+      ]
+    }
+  }
+}
