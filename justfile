@@ -23,6 +23,9 @@ check: lint test
 calendar:
     uv run python -m pricediscovery.calendar
 
+data *args:
+    uv run python -m pricediscovery.ingest {{args}}
+
 # Regenerates every figure and every number quoted in the README from raw data.
 # Nothing may be typed into the README by hand.
 results:
