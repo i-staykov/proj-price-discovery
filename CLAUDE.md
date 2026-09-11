@@ -29,7 +29,7 @@ ticket that drifts toward alpha research gets closed with the reason stated in t
 4. **Every number in the README is generated, never typed.** `just results` regenerates all figures
    and reported numbers from raw data.
 5. **Nothing personal in the public repository.** `private/` is gitignored and stays that way.
-6. **Size discipline.** No issue larger than one evening. Split anything bigger.
+6. **Issue scope.** One question per issue. Split independent questions; the writing limits below apply.
 
 ## Decisions
 

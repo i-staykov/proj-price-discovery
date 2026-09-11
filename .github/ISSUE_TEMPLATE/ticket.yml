@@ -1,5 +1,5 @@
 name: Ticket
-description: A unit of work no larger than one evening.
+description: One question, at most fifteen lines.
 body:
   - type: textarea
     id: question
