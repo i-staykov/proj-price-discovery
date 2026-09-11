@@ -4,8 +4,8 @@ data/
 *.parquet
 .venv/
 
-# LaTeX source is committed; the built copy lives at the repository root.
-docs/model/model.pdf
+# Only the repository-root presentation is committed.
+docs/model/*.pdf
 docs/model/*.aux
 docs/model/*.log
 docs/model/*.out

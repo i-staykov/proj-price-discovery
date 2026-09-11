@@ -40,7 +40,7 @@ Derivations are exempt. Length is a fault only when it is padding.
 ## Register
 
 Everything committed is production. No teaching, toy examples, analogies or "recall that". Justify
-a choice; do not explain the concept behind it. `model.pdf` is a concise reviewer-facing exception.
+a choice; do not explain the concept behind it. `model-explained.pdf` is a concise reviewer-facing exception.
 
 ## Commits
 

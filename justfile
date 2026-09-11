@@ -16,6 +16,10 @@ test:
 
 check: lint test
 
+model:
+    cd docs/model && pdflatex -halt-on-error model-explained.tex && pdflatex -halt-on-error model-explained.tex
+    cp docs/model/model-explained.pdf model-explained.pdf
+
 # Rebuilds the release calendar snapshot from ALFRED and the Fed meeting calendars.
 # Needs FRED_API_KEY in the environment. Run by hand: it hits api.stlouisfed.org and
 # federalreserve.gov, neither of which CI reaches, so the snapshot is a committed
