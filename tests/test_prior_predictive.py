@@ -32,4 +32,15 @@ def test_hyperparameters_are_redrawn_per_dataset():
 
 
 def test_committed_candidates_reproduce():
-    assert json.loads(RESULT.read_text()) == measure()
+    expected = json.loads(RESULT.read_text())
+    actual = measure()
+    candidates = expected.pop("candidates")
+    measured = actual.pop("candidates")
+    assert actual == expected
+    for candidate, summary in candidates.items():
+        for quantity, value in summary.items():
+            if isinstance(value, str):
+                assert measured[candidate][quantity] == value
+            else:
+                # Transcendental functions can round differently across CPU libraries.
+                assert measured[candidate][quantity] == pytest.approx(value, rel=1e-12)
